@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.window.core.layout.WindowWidthSizeClass
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Created by Raúl L.C. on 12/3/25.
@@ -37,8 +38,8 @@ fun NavigationWrapperUI(
         navigationSuiteItems = {
             NotificatorDestinations.entries.forEach {
                 item(
-                    label = { Text(it.title) },
-                    icon = { Icon(it.icon, contentDescription = it.title) },
+                    label = { Text(stringResource(it.title)) },
+                    icon = { Icon(it.icon, contentDescription = stringResource(it.title)) },
                     selected = it == selectedDestination,
                     onClick = {
                         selectedDestination = it

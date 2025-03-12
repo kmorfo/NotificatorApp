@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="projects_title">Projects</string>
+    <string name="apps_title">Apps</string>
+    <string name="devices_title">Devices</string>
+    <string name="channels_title">Channels</string>
+    <string name="messages_title">Messages</string>
+    <string name="tasks_title">Tasks</string>
+</resources>

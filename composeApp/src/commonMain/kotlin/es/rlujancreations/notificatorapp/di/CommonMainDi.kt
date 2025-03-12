@@ -1,6 +1,7 @@
 package es.rlujancreations.notificatorapp.di
 
 import es.rlujancreations.core.data.di.coreDataModule
+import es.rlujancreations.core.presentation.di.coreUiModule
 import es.rlujancreations.database.di.coreDatabaseModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -18,6 +19,7 @@ fun initKoin(config: KoinAppDeclaration? = null) {
         modules(
             coreDatabaseModule,
             coreDataModule,
+            coreUiModule,
             *commonNativeModules.toTypedArray(),
         )
     }
