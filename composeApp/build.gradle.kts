@@ -1,6 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
-
 plugins {
     alias(libs.plugins.notificatorapp.multiplatform.application.compose)
 }
@@ -24,6 +23,8 @@ kotlin {
             implementation(libs.compose.material3.adaptive.layout)
             implementation(libs.compose.material3.adaptive.nav.suite)
             implementation(libs.compose.material3.adaptive.navigation)
+
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
