@@ -13,8 +13,6 @@ expect val kSecureStorageModule: Module
 val coreDataModule =
     module {
 
-
-
         // Create a single instance of encrypted shared preferences to save token an inject it
 //        single { HttpClientFactory(get()).build() }
         single { HttpClientFactory().build() }

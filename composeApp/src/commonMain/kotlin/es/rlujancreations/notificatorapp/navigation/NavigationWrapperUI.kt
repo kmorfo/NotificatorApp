@@ -1,6 +1,5 @@
 package es.rlujancreations.notificatorapp.navigation
 
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
@@ -20,20 +19,19 @@ import org.jetbrains.compose.resources.stringResource
  */
 
 @Composable
-fun NavigationWrapperUI(
-    content: @Composable () -> Unit = {},
-) {
+fun NavigationWrapperUI(content: @Composable () -> Unit = {}) {
     var selectedDestination: NotificatorDestinations by remember {
         mutableStateOf(NotificatorDestinations.Projects)
     }
     val adaptiveInfo = currentWindowAdaptiveInfo()
     val windowSize = adaptiveInfo.windowSizeClass.windowWidthSizeClass
 
-    val navLayoutType = if (windowSize == WindowWidthSizeClass.EXPANDED) {
-        NavigationSuiteType.NavigationDrawer
-    } else {
-        NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfo())
-    }
+    val navLayoutType =
+        if (windowSize == WindowWidthSizeClass.EXPANDED) {
+            NavigationSuiteType.NavigationDrawer
+        } else {
+            NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfo())
+        }
 
     NavigationSuiteScaffold(
         navigationSuiteItems = {

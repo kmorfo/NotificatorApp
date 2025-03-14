@@ -8,7 +8,8 @@ import org.koin.dsl.module
 /**
  * Created by Raúl L.C. on 14/3/25.
  */
-val coreDomainModule = module {
-    singleOf(::SetUserPreferencesUseCase)
-    singleOf(::GetUserPreferencesUseCase)
-}
+val coreDomainModule =
+    module {
+        singleOf(::SetUserPreferencesUseCase)
+        singleOf(::GetUserPreferencesUseCase)
+    }

@@ -18,13 +18,11 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.core.database)
 
-            //Adaptive components
+            // Adaptive components
             implementation(libs.compose.material3.adaptive)
             implementation(libs.compose.material3.adaptive.layout)
             implementation(libs.compose.material3.adaptive.nav.suite)
             implementation(libs.compose.material3.adaptive.navigation)
-
-
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

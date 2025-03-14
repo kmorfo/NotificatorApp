@@ -5,8 +5,8 @@ import es.rlujancreations.core.domain.user.UserId
 import es.rlujancreations.core.domain.userPreferences.UserPreferencesDataSource
 import es.rlujancreations.core.domain.userPreferences.UserPreferencesModel
 import es.rlujancreations.core.domain.util.DataError
-import es.rlujancreations.core.domain.util.Result
 import es.rlujancreations.core.domain.util.EmptyResult
+import es.rlujancreations.core.domain.util.Result
 import es.rlujancreations.database.userPreferences.dao.UserPreferencesDAO
 import es.rlujancreations.database.userPreferences.mappers.toDomain
 import es.rlujancreations.database.userPreferences.mappers.toEntity

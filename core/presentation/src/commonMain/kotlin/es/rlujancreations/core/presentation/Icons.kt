@@ -20,7 +20,6 @@ import notificatorapp.core.presentation.generated.resources.ic_send
 import notificatorapp.core.presentation.generated.resources.ic_task
 import org.jetbrains.compose.resources.painterResource
 
-
 /**
  * Created by Raúl L.C. on 12/3/25.
  */

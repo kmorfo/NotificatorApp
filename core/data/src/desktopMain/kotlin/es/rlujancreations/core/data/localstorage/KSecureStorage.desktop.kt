@@ -35,15 +35,16 @@ actual class KSecureStorage actual constructor() : IKSecureStorage {
         File(keyDirectory).mkdirs()
 
         // Get or create the salt
-        val salt = if (saltFile.exists()) {
-            Files.readAllBytes(saltFile.toPath())
-        } else {
-            val newSalt = ByteArray(16)
-            SecureRandom().nextBytes(newSalt)
-            saltFile.parentFile.mkdirs()
-            Files.write(saltFile.toPath(), newSalt)
-            newSalt
-        }
+        val salt =
+            if (saltFile.exists()) {
+                Files.readAllBytes(saltFile.toPath())
+            } else {
+                val newSalt = ByteArray(16)
+                SecureRandom().nextBytes(newSalt)
+                saltFile.parentFile.mkdirs()
+                Files.write(saltFile.toPath(), newSalt)
+                newSalt
+            }
 
         // Generates a new key based on the password
         val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
@@ -60,7 +61,10 @@ actual class KSecureStorage actual constructor() : IKSecureStorage {
         }
     }
 
-    override fun setItem(key: String, value: String?) {
+    override fun setItem(
+        key: String,
+        value: String?,
+    ) {
         checkInitialization()
 
         if (value == null) {

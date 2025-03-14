@@ -7,6 +7,7 @@ import org.koin.dsl.module
 /**
  * Created by Raúl L.C. on 12/3/25.
  */
-actual val coreUiModule = module {
-    single<StringProvider> { GetStringProvider() }
-}
+actual val coreUiModule =
+    module {
+        single<StringProvider> { GetStringProvider() }
+    }

@@ -35,4 +35,3 @@ fun MontserratTypography() =
             titleSmall = baseline.titleSmall.copy(fontFamily = MontserratFontFamily()),
         )
     }
-

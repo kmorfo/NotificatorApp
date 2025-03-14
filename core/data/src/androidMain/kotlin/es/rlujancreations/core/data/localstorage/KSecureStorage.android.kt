@@ -1,8 +1,8 @@
 package es.rlujancreations.core.data.localstorage
 
 import android.content.SharedPreferences
-import es.rlujancreations.core.domain.IKSecureStorage
 import androidx.core.content.edit
+import es.rlujancreations.core.domain.IKSecureStorage
 
 /**
  * Created by Raúl L.C. on 13/3/25.
@@ -53,7 +53,7 @@ actual class KSecureStorage actual constructor() : IKSecureStorage {
     }
 
     private inline fun editSharedPreferences(action: SharedPreferences.Editor.() -> Unit) {
-        sharedPreferences.edit() {
+        sharedPreferences.edit {
             action()
         }
     }

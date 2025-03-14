@@ -31,6 +31,4 @@ enum class NotificatorDestinations(
     Channels(Res.string.channels_title, { ChannelIcon() }),
     Messages(Res.string.messages_title, { SendIcon() }),
     Tasks(Res.string.tasks_title, { TaskIcon() }),
-
 }
-
