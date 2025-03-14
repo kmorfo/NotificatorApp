@@ -11,6 +11,8 @@ import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaf
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import es.rlujancreations.core.domain.IKSecureStorage
+import es.rlujancreations.core.presentation.theme.NotificatorAppTheme
 import es.rlujancreations.notificatorapp.navigation.NavigationWrapperUI
 import org.koin.compose.KoinContext
 
@@ -23,7 +25,7 @@ fun App() {
 //            "${adaptiveInfo.windowSizeClass.windowHeightSizeClass}"
 
     KoinContext {
-        MaterialTheme {
+        NotificatorAppTheme {
 //            val navController = rememberNavController()
 //
 //            NavigationRoot(
@@ -43,9 +45,7 @@ fun App() {
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
-fun ScaffoldAppContent(
-
-) {
+fun ScaffoldAppContent() {
     val navigator = rememberListDetailPaneScaffoldNavigator<Long>()
 
     ListDetailPaneScaffold(

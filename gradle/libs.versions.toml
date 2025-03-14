@@ -33,15 +33,20 @@ kotlinxDatetime = "0.6.1"
 moko-permissions = "0.18.0"
 serialization = "1.7.3"
 
-#Test
-test-runner = "1.6.2"
-test-core = "1.6.1"
-
 ktlint = "12.1.1"
 napier = "2.6.1"
 
 material3Adaptive = "1.1.0-alpha04"
 material3AdaptiveNavSuite = "1.8.0-alpha04"
+
+# EncriptedSharedPreferences
+securityCrypto = "1.1.0-alpha06"
+startupRuntime = "1.2.0"
+kotlinStdlib = "2.1.10"
+
+#Test
+test-runner = "1.6.2"
+test-core = "1.6.1"
 
 # Project versions
 projectApplicationId = "es.rlujancreations.notificatorapp"
@@ -125,6 +130,11 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "androidx-sqliteBundled" }
+
+# EncriptedSharedPreferences
+androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "securityCrypto" }
+androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startupRuntime" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdlib" }
 
 # Gradle
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }

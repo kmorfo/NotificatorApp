@@ -14,6 +14,10 @@ kotlin {
     sourceSets {
         val desktopMain by getting
 
+        androidMain.dependencies {
+            implementation(libs.androidx.security.crypto)
+            implementation(libs.androidx.startup.runtime)
+        }
         commonMain.dependencies {
             implementation(projects.core.domain)
         }
