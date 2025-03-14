@@ -18,6 +18,14 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.core.database)
 
+            implementation(projects.onboarding.presentation)
+            implementation(projects.onboarding.data)
+            implementation(projects.onboarding.domain)
+
+            implementation(projects.auth.presentation)
+            implementation(projects.auth.data)
+            implementation(projects.auth.domain)
+
             // Adaptive components
             implementation(libs.compose.material3.adaptive)
             implementation(libs.compose.material3.adaptive.layout)
