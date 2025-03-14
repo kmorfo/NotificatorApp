@@ -2,7 +2,7 @@ package es.rlujancreations.database.di
 
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import es.rlujancreations.database.DatabaseFactory
-import es.rlujancreations.database.SampleDatabase
+import es.rlujancreations.database.Database
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -19,5 +19,6 @@ val coreDatabaseModule =
                 .setDriver(BundledSQLiteDriver())
                 .build()
         }
-        single { get<SampleDatabase>().sampleDAO }
+        single { get<Database>().userPreferencesDAO }
+        single { get<Database>().userDAO }
     }
