@@ -19,7 +19,7 @@ import es.rlujancreations.database.userPreferences.entitiy.UserPreferencesEntity
     version = 1,
 )
 @ConstructedBy(DatabaseConstructor::class)
-abstract class Database : RoomDatabase() {
+abstract class NotificatorDatabase : RoomDatabase() {
     abstract val userPreferencesDAO: UserPreferencesDAO
     abstract val userDAO: UserDAO
 

@@ -11,9 +11,9 @@ import platform.Foundation.NSUserDomainMask
  * Created by Raúl L.C. on 19/1/25.
  */
 actual class DatabaseFactory {
-    actual fun create(): RoomDatabase.Builder<Database> {
-        val dbFile = documentDirectory() + "/${Database.DB_NAME}"
-        return Room.databaseBuilder<Database>(
+    actual fun create(): RoomDatabase.Builder<NotificatorDatabase> {
+        val dbFile = documentDirectory() + "/${NotificatorDatabase.DB_NAME}"
+        return Room.databaseBuilder<NotificatorDatabase>(
             name = dbFile,
         )
     }

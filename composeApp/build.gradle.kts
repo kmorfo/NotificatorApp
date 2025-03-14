@@ -45,6 +45,16 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "es.rlujancreations.notificatorapp"
             packageVersion = "1.0.0"
+
+            macOS {
+                iconFile.set(project.file("resources/icon.icns"))
+            }
+//            windows {
+//                iconFile.set(project.file("resources/icon.ico"))
+//            }
+//            linux {
+//                iconFile.set(project.file("resources/icon.icon"))
+//            }
         }
     }
 }

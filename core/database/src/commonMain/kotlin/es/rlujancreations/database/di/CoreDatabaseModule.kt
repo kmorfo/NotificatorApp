@@ -4,7 +4,7 @@ import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import es.rlujancreations.core.domain.user.UserDataSourceLocal
 import es.rlujancreations.core.domain.userPreferences.UserPreferencesDataSource
 import es.rlujancreations.database.DatabaseFactory
-import es.rlujancreations.database.Database
+import es.rlujancreations.database.NotificatorDatabase
 import es.rlujancreations.database.user.UserDataSourceLocalRoom
 import es.rlujancreations.database.userPreferences.UserPreferencesDataSourceRoom
 import org.koin.core.module.Module
@@ -25,8 +25,8 @@ val coreDatabaseModule =
                 .setDriver(BundledSQLiteDriver())
                 .build()
         }
-        single { get<Database>().userPreferencesDAO }
-        single { get<Database>().userDAO }
+        single { get<NotificatorDatabase>().userPreferencesDAO }
+        single { get<NotificatorDatabase>().userDAO }
 
         singleOf(::UserDataSourceLocalRoom).bind<UserDataSourceLocal>()
         singleOf(::UserPreferencesDataSourceRoom).bind<UserPreferencesDataSource>()

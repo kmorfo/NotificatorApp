@@ -9,7 +9,7 @@ import java.io.File
  * Created by Raúl L.C. on 19/1/25.
  */
 actual class DatabaseFactory {
-    actual fun create(): RoomDatabase.Builder<Database> {
+    actual fun create(): RoomDatabase.Builder<NotificatorDatabase> {
         val os = System.getProperty("os.name").lowercase()
         val userHome = System.getProperty("user.home")
         val appDataDir = when {
@@ -22,7 +22,7 @@ actual class DatabaseFactory {
             appDataDir.mkdirs()
         }
 
-        val dbFile = File(appDataDir, Database.DB_NAME)
+        val dbFile = File(appDataDir, NotificatorDatabase.DB_NAME)
         return Room.databaseBuilder(dbFile.absolutePath)
     }
 }

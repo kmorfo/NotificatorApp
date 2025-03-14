@@ -10,6 +10,8 @@ kotlin {
 
         commonMain.dependencies {
             implementation(compose.components.resources)
+
+            implementation(projects.core.domain)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

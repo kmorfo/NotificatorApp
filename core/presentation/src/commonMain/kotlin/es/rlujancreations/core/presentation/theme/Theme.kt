@@ -7,7 +7,15 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import es.rlujancreations.core.domain.userPreferences.DarkModeSettings
+import es.rlujancreations.core.domain.userPreferences.UserPreferencesModel
+import es.rlujancreations.core.domain.userPreferences.usecases.GetUserPreferencesUseCase
+import org.koin.compose.koinInject
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -99,10 +107,27 @@ val unspecified_scheme = ColorFamily(
 
 @Composable
 fun NotificatorAppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false,
     content: @Composable() () -> Unit,
 ) {
+//    darkTheme: Boolean = isSystemInDarkTheme(),
+    val getUserPreferencesUseCase = koinInject<GetUserPreferencesUseCase>()
+
+
+    val userSettings by remember {
+        mutableStateOf(
+            UserPreferencesModel(
+                userId = -1,
+                darkMode = DarkModeSettings.SYSTEM_DEFAULT,
+            ),
+        )
+    }
+
+    val darkTheme =
+        when (userSettings.darkMode) {
+            DarkModeSettings.DARK_MODE -> true
+            DarkModeSettings.LIGHT_MODE -> false
+            DarkModeSettings.SYSTEM_DEFAULT -> isSystemInDarkTheme()
+        }
 
     MaterialTheme(
         colorScheme = if (darkTheme) darkScheme else lightScheme,
