@@ -44,4 +44,8 @@ include(":auth:data")
 include(":auth:domain")
 include(":auth:presentation")
 
+include(":home:data")
+include(":home:domain")
+include(":home:presentation")
+
 include(":commonTest")

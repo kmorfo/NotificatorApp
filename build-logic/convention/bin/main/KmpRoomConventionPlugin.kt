@@ -40,7 +40,6 @@ class KmpRoomConventionPlugin : Plugin<Project> {
                 add("kspIosArm64", libs.findLibrary("androidx.room.compiler").get())
                 add("kspIosSimulatorArm64", libs.findLibrary("androidx.room.compiler").get())
             }
-
         }
     }
 }

@@ -26,6 +26,10 @@ kotlin {
             implementation(projects.auth.data)
             implementation(projects.auth.domain)
 
+            implementation(projects.home.presentation)
+            implementation(projects.home.data)
+            implementation(projects.home.domain)
+
             // Adaptive components
             implementation(libs.compose.material3.adaptive)
             implementation(libs.compose.material3.adaptive.layout)
