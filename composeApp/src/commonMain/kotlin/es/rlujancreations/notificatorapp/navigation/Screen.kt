@@ -9,8 +9,26 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed class Screen {
     @Serializable
+    object Auth {
+        @Serializable
+        object Intro
+
+        @Serializable
+        object Register
+
+        @Serializable
+        object Login
+
+        @Serializable
+        object Recovery
+    }
+
+    @Serializable
     object Home {
         @Serializable
         object Scaffold
+
+        @Serializable
+        object Settings
     }
 }

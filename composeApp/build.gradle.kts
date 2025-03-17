@@ -30,11 +30,6 @@ kotlin {
             implementation(projects.home.data)
             implementation(projects.home.domain)
 
-            // Adaptive components
-            implementation(libs.compose.material3.adaptive)
-            implementation(libs.compose.material3.adaptive.layout)
-            implementation(libs.compose.material3.adaptive.nav.suite)
-            implementation(libs.compose.material3.adaptive.navigation)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

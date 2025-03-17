@@ -1,4 +1,4 @@
-package es.rlujancreations.notificatorapp.navigation
+package es.rlujancreations.home.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import es.rlujancreations.core.presentation.AppIcon
@@ -8,13 +8,13 @@ import es.rlujancreations.core.presentation.DevicesIcon
 import es.rlujancreations.core.presentation.ProjectIcon
 import es.rlujancreations.core.presentation.SendIcon
 import es.rlujancreations.core.presentation.TaskIcon
-import notificatorapp.composeapp.generated.resources.Res
-import notificatorapp.composeapp.generated.resources.apps_title
-import notificatorapp.composeapp.generated.resources.channels_title
-import notificatorapp.composeapp.generated.resources.devices_title
-import notificatorapp.composeapp.generated.resources.messages_title
-import notificatorapp.composeapp.generated.resources.projects_title
-import notificatorapp.composeapp.generated.resources.tasks_title
+import notificatorapp.home.presentation.generated.resources.Res
+import notificatorapp.home.presentation.generated.resources.apps_title
+import notificatorapp.home.presentation.generated.resources.channels_title
+import notificatorapp.home.presentation.generated.resources.devices_title
+import notificatorapp.home.presentation.generated.resources.messages_title
+import notificatorapp.home.presentation.generated.resources.projects_title
+import notificatorapp.home.presentation.generated.resources.tasks_title
 import org.jetbrains.compose.resources.StringResource
 
 /**

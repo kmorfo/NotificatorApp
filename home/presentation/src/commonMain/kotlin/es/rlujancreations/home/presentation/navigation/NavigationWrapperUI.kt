@@ -1,4 +1,4 @@
-package es.rlujancreations.notificatorapp.navigation
+package es.rlujancreations.home.presentation.navigation
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
