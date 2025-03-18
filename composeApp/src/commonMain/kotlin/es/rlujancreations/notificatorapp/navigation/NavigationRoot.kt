@@ -9,6 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import es.rlujancreations.home.presentation.HomeScreenRoot
+import es.rlujancreations.onboarding.presentation.OnBoardingRoot
+import es.rlujancreations.onboarding.presentation.login.LoginScreenRoot
+import es.rlujancreations.onboarding.presentation.recovery.RecoveryScreenRoot
+import es.rlujancreations.onboarding.presentation.register.RegisterScreenRoot
 
 /**
  * Created by Raúl L.C. on 19/1/25.
@@ -17,17 +21,32 @@ import es.rlujancreations.home.presentation.HomeScreenRoot
 fun NavigationRoot(navController: NavHostController = rememberNavController()) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home,
+        startDestination = Screen.OnBoarding,
     ) {
+        onBoardingGraph(navController)
         authGraph(navController)
         homeGraph(navController)
     }
 }
 
+private fun NavGraphBuilder.onBoardingGraph(navController: NavHostController) {
+    navigation<Screen.OnBoarding>(startDestination = Screen.OnBoarding.Intro) {
+        composable<Screen.OnBoarding.Intro> {
+            OnBoardingRoot()
+        }
+    }
+}
+
 private fun NavGraphBuilder.authGraph(navController: NavHostController) {
-    navigation<Screen.Auth>(startDestination = Screen.Auth.Intro) {
-        composable<Screen.Auth.Intro> {
-            Text("Intro")
+    navigation<Screen.Auth>(startDestination = Screen.Auth.Login) {
+        composable<Screen.Auth.Login> {
+            LoginScreenRoot()
+        }
+        composable<Screen.Auth.Register> {
+            RegisterScreenRoot()
+        }
+        composable<Screen.Auth.Recovery> {
+            RecoveryScreenRoot()
         }
     }
 }
@@ -38,7 +57,7 @@ private fun NavGraphBuilder.homeGraph(navController: NavHostController) {
             HomeScreenRoot(
                 onSettingsClick = { navController.navigate(Screen.Home.Settings) },
                 onTokenExpired = {
-                    navController.navigate(Screen.Auth.Intro) {
+                    navController.navigate(Screen.Auth.Login) {
                         popUpTo(Screen.Home.Scaffold) { inclusive = true }
                         launchSingleTop = true
                     }

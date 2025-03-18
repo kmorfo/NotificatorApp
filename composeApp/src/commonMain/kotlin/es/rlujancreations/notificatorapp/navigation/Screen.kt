@@ -8,11 +8,15 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 sealed class Screen {
+
     @Serializable
-    object Auth {
+    object OnBoarding {
         @Serializable
         object Intro
+    }
 
+    @Serializable
+    object Auth {
         @Serializable
         object Register
 
