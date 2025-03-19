@@ -1,3 +1,4 @@
 exclude:
   - "**/build/**"
   - "**/commonTest/**"
+  - "**/main.kt"

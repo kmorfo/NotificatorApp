@@ -7,9 +7,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun RecoveryScreenRoot(
-    viewModel: RecoveryViewModel = koinViewModel(),
-) {
+fun RecoveryScreenRoot(viewModel: RecoveryViewModel = koinViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     RecoveryScreen(

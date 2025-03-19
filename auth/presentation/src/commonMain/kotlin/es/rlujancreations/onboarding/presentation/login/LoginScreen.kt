@@ -7,9 +7,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun LoginScreenRoot(
-    viewModel: LoginViewModel = koinViewModel(),
-) {
+fun LoginScreenRoot(viewModel: LoginViewModel = koinViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LoginScreen(
@@ -25,4 +23,3 @@ fun LoginScreen(
 ) {
     Text("Login Screen")
 }
-

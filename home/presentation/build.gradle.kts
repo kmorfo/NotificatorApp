@@ -19,7 +19,6 @@ kotlin {
             implementation(libs.compose.material3.adaptive.layout)
             implementation(libs.compose.material3.adaptive.nav.suite)
             implementation(libs.compose.material3.adaptive.navigation)
-
         }
     }
 }

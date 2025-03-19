@@ -12,6 +12,9 @@ kotlin {
             implementation(compose.components.resources)
 
             implementation(projects.core.domain)
+            implementation(projects.core.presentation)
+
+            implementation(projects.onboarding.domain)
         }
     }
 }

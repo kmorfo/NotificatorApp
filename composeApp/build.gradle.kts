@@ -13,23 +13,21 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.napier)
 
-            implementation(projects.core.presentation)
             implementation(projects.core.data)
             implementation(projects.core.domain)
             implementation(projects.core.database)
+            implementation(projects.core.presentation)
 
-            implementation(projects.onboarding.presentation)
-            implementation(projects.onboarding.data)
             implementation(projects.onboarding.domain)
+            implementation(projects.onboarding.presentation)
 
-            implementation(projects.auth.presentation)
             implementation(projects.auth.data)
             implementation(projects.auth.domain)
+            implementation(projects.auth.presentation)
 
-            implementation(projects.home.presentation)
             implementation(projects.home.data)
             implementation(projects.home.domain)
-
+            implementation(projects.home.presentation)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

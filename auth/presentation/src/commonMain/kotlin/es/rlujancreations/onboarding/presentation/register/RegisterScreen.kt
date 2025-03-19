@@ -7,9 +7,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun RegisterScreenRoot(
-    viewModel: RegisterViewModel = koinViewModel(),
-) {
+fun RegisterScreenRoot(viewModel: RegisterViewModel = koinViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     RegisterScreen(
@@ -24,5 +22,4 @@ fun RegisterScreen(
     onAction: (RegisterAction) -> Unit,
 ) {
     Text("Register Screen")
-
 }

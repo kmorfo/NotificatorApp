@@ -11,9 +11,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 /**
  * Created by Raúl L.C. on 17/3/25.
  */
-class HomeViewModel(
-
-) : ViewModel() {
+class HomeViewModel() : ViewModel() {
     var state by mutableStateOf(HomeState())
         private set
 
@@ -27,7 +25,6 @@ class HomeViewModel(
     }
 
     private fun getUserData() {
-
     }
 
     fun onAction(action: HomeAction) {

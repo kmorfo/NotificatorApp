@@ -7,6 +7,7 @@ import org.koin.dsl.module
 /**
  * Created by Raúl L.C. on 17/3/25.
  */
-val homePresentationModule = module {
-    viewModelOf(::HomeViewModel)
-}
+val homePresentationModule =
+    module {
+        viewModelOf(::HomeViewModel)
+    }

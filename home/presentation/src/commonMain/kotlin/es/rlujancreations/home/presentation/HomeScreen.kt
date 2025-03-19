@@ -8,7 +8,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import es.rlujancreations.core.presentation.ObserveAsEvents
@@ -29,7 +28,6 @@ fun HomeScreenRoot(
     onTokenExpired: () -> Unit,
     viewModel: HomeViewModel = koinViewModel(),
 ) {
-
     HomeScreen(
         state = viewModel.state,
         onAction = { action ->
@@ -101,12 +99,11 @@ fun HomeScreen(
             Text("Hola desde scaffold")
         }
     }
-
 }
 
-//@OptIn(ExperimentalMaterial3AdaptiveApi::class)
-//@Composable
-//fun ScaffoldAppContent() {
+// @OptIn(ExperimentalMaterial3AdaptiveApi::class)
+// @Composable
+// fun ScaffoldAppContent() {
 //    val navigator = rememberListDetailPaneScaffoldNavigator<Long>()
 //
 //    ListDetailPaneScaffold(
@@ -123,5 +120,4 @@ fun HomeScreen(
 //            }
 //        },
 //    )
-//}
-
+// }

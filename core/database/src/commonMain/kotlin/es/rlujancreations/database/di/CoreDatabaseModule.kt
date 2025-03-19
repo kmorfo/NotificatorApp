@@ -5,8 +5,10 @@ import es.rlujancreations.core.domain.user.UserDataSourceLocal
 import es.rlujancreations.core.domain.userPreferences.UserPreferencesDataSource
 import es.rlujancreations.database.DatabaseFactory
 import es.rlujancreations.database.NotificatorDatabase
+import es.rlujancreations.database.onboarding.OnboardingRepositoryRoom
 import es.rlujancreations.database.user.UserDataSourceLocalRoom
 import es.rlujancreations.database.userPreferences.UserPreferencesDataSourceRoom
+import es.rlujancreations.onboarding.domain.OnboardingRepository
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -25,9 +27,11 @@ val coreDatabaseModule =
                 .setDriver(BundledSQLiteDriver())
                 .build()
         }
-        single { get<NotificatorDatabase>().userPreferencesDAO }
         single { get<NotificatorDatabase>().userDAO }
+        single { get<NotificatorDatabase>().userPreferencesDAO }
+        single { get<NotificatorDatabase>().onboardingDAO }
 
         singleOf(::UserDataSourceLocalRoom).bind<UserDataSourceLocal>()
         singleOf(::UserPreferencesDataSourceRoom).bind<UserPreferencesDataSource>()
+        singleOf(::OnboardingRepositoryRoom).bind<OnboardingRepository>()
     }

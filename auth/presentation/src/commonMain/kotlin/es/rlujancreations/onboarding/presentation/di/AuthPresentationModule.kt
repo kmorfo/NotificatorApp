@@ -9,8 +9,9 @@ import org.koin.dsl.module
 /**
  * Created by Raúl L.C. on 18/3/25.
  */
-val authPresentationModule = module {
-    viewModelOf(::LoginViewModel)
-    viewModelOf(::RecoveryViewModel)
-    viewModelOf(::RegisterViewModel)
-}
+val authPresentationModule =
+    module {
+        viewModelOf(::LoginViewModel)
+        viewModelOf(::RecoveryViewModel)
+        viewModelOf(::RegisterViewModel)
+    }

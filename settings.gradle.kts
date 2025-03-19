@@ -36,7 +36,6 @@ include(":core:presentation")
 include(":core:database")
 include(":core:domain")
 
-include(":onboarding:data")
 include(":onboarding:domain")
 include(":onboarding:presentation")
 

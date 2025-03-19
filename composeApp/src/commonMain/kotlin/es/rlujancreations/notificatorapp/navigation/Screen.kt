@@ -8,9 +8,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 sealed class Screen {
-
     @Serializable
-    object OnBoarding {
+    object Onboarding {
         @Serializable
         object Intro
     }

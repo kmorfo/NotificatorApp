@@ -1,6 +1,5 @@
 package es.rlujancreations.notificatorapp.navigation
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -21,18 +20,20 @@ import es.rlujancreations.onboarding.presentation.register.RegisterScreenRoot
 fun NavigationRoot(navController: NavHostController = rememberNavController()) {
     NavHost(
         navController = navController,
-        startDestination = Screen.OnBoarding,
+        startDestination = Screen.Onboarding,
     ) {
-        onBoardingGraph(navController)
+        onboardingGraph(navController)
         authGraph(navController)
         homeGraph(navController)
     }
 }
 
-private fun NavGraphBuilder.onBoardingGraph(navController: NavHostController) {
-    navigation<Screen.OnBoarding>(startDestination = Screen.OnBoarding.Intro) {
-        composable<Screen.OnBoarding.Intro> {
-            OnBoardingRoot()
+private fun NavGraphBuilder.onboardingGraph(navController: NavHostController) {
+    navigation<Screen.Onboarding>(startDestination = Screen.Onboarding.Intro) {
+        composable<Screen.Onboarding.Intro> {
+            OnBoardingRoot(
+                onFinish = { navController.navigate(Screen.Auth.Login) },
+            )
         }
     }
 }

@@ -13,6 +13,7 @@ kotlin {
 
         commonMain.dependencies {
             implementation(projects.core.domain)
+            implementation(projects.onboarding.domain)
 
             implementation(libs.kotlinx.datetime)
         }

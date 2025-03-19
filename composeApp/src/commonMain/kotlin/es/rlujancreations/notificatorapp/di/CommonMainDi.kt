@@ -7,8 +7,9 @@ import es.rlujancreations.core.presentation.di.coreUiModule
 import es.rlujancreations.database.di.coreDatabaseModule
 import es.rlujancreations.database.di.databaseNativeModule
 import es.rlujancreations.home.presentation.di.homePresentationModule
+import es.rlujancreations.onboarding.domain.di.onboardingDomainModule
 import es.rlujancreations.onboarding.presentation.di.authPresentationModule
-import es.rlujancreations.onboarding.presentation.di.onBoardingPresentationModule
+import es.rlujancreations.onboarding.presentation.di.onboardingPresentationModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
@@ -30,7 +31,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             coreDomainModule,
             coreUiModule,
             homePresentationModule,
-            onBoardingPresentationModule,
+            onboardingDomainModule,
+            onboardingPresentationModule,
             kSecureStorageModule,
             *commonNativeModules.toTypedArray(),
         )

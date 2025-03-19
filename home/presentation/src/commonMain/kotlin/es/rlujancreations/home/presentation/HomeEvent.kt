@@ -7,6 +7,8 @@ import es.rlujancreations.core.presentation.UiText
  */
 sealed interface HomeEvent {
     data class Error(val error: UiText) : HomeEvent
+
     data class ErrorTokenExpired(val error: UiText) : HomeEvent
+
     data class Success(val message: UiText) : HomeEvent
 }
