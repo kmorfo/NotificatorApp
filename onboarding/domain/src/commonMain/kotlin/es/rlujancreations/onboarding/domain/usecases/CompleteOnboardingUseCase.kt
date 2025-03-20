@@ -9,7 +9,6 @@ class CompleteOnboardingUseCase(
     private val repository: OnboardingRepository,
 ) {
     suspend operator fun invoke() {
-        println("Ejecutando CompleteOnboardingUseCase")
-//        return repository.completeOnboarding()
+        return repository.completeOnboarding()
     }
 }

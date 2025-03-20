@@ -17,10 +17,13 @@ import es.rlujancreations.onboarding.presentation.register.RegisterScreenRoot
  * Created by Raúl L.C. on 19/1/25.
  */
 @Composable
-fun NavigationRoot(navController: NavHostController = rememberNavController()) {
+fun NavigationRoot(
+    navController: NavHostController = rememberNavController(),
+    startDestination: Any = Screen.Onboarding,
+) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Onboarding,
+        startDestination = startDestination,
     ) {
         onboardingGraph(navController)
         authGraph(navController)

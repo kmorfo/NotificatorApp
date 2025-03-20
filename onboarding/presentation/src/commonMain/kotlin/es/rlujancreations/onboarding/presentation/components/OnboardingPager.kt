@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
@@ -21,6 +22,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -30,8 +32,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import es.rlujancreations.core.presentation.Shapes
 import es.rlujancreations.onboarding.presentation.OnboardingPagerInformation
 import kotlinx.coroutines.launch
@@ -52,6 +59,8 @@ fun OnBoardingPager(
     modifier: Modifier = Modifier,
     onFinish: () -> Unit,
 ) {
+    val windowClass = currentWindowAdaptiveInfo().windowSizeClass
+
     val pagerState = rememberPagerState { pages.size }
     val coroutineScope = rememberCoroutineScope()
 
@@ -66,40 +75,24 @@ fun OnBoardingPager(
                 contentScale = ContentScale.FillBounds,
             )
 
-            Column(
-                modifier = Modifier.fillMaxSize().padding(20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top,
-            ) {
+            if (windowClass.windowWidthSizeClass != WindowWidthSizeClass.EXPANDED) {
                 Column(
-                    modifier =
-                        Modifier
-                            .clip(Shapes.medium)
-                            .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
-                            .padding(20.dp),
+                    modifier = Modifier.fillMaxSize().padding(20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
+                    verticalArrangement = Arrangement.Top,
                 ) {
-                    Text(
-                        stringResource(information.title),
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onBackground,
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        stringResource(information.subtitle),
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onBackground,
-                    )
+                    ContentOnboarding(windowClass, information)
                 }
-                Spacer(modifier = Modifier.height(24.dp))
-                Image(
-                    painter = painterResource(information.image),
-                    contentDescription = "Onboarding " + stringResource(information.title),
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier.aspectRatio(1f).clip(Shapes.medium),
-                )
+            } else {
+                Row(
+                    modifier = Modifier.fillMaxSize().padding(20.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    ContentOnboarding(windowClass, information)
+                }
             }
+
             Row(
                 modifier =
                     Modifier
@@ -121,6 +114,14 @@ fun OnBoardingPager(
                         Text(
                             text = stringResource(Res.string.btn_skip),
                             style = TextStyle(color = MaterialTheme.colorScheme.tertiary),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 16.sp,
+                            modifier = Modifier
+                                .clip(Shapes.extraLarge)
+                                .background(
+                                    MaterialTheme.colorScheme.background.copy(alpha = 0.4f),
+                                )
+                                .padding(12.dp),
                         )
                     }
                     HorizontalPagerIndicator(
@@ -141,12 +142,58 @@ fun OnBoardingPager(
                         Text(
                             text = stringResource(Res.string.btn_next),
                             style = TextStyle(color = MaterialTheme.colorScheme.tertiary),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 16.sp,
+                            modifier = Modifier
+                                .clip(Shapes.extraLarge)
+                                .background(
+                                    MaterialTheme.colorScheme.background.copy(alpha = 0.4f),
+                                )
+                                .padding(12.dp),
                         )
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+private fun ContentOnboarding(
+    windowClass: WindowSizeClass,
+    information: OnboardingPagerInformation,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(
+                if (windowClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) 0.5f else 1f,
+            )
+            .clip(Shapes.medium)
+            .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
+            .padding(20.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        Text(
+            stringResource(information.title),
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+        Spacer(modifier = Modifier.size(16.dp))
+        Text(
+            stringResource(information.subtitle),
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.Justify,
+        )
+    }
+    Spacer(modifier = Modifier.size(24.dp))
+    Image(
+        painter = painterResource(information.image),
+        contentDescription = "Onboarding " + stringResource(information.title),
+        contentScale = ContentScale.Fit,
+        modifier = Modifier.aspectRatio(1f).clip(Shapes.medium),
+    )
 }
 
 @Composable
@@ -158,8 +205,8 @@ private fun HorizontalPagerIndicator(
     modifier: Modifier = Modifier,
     activeColor: Color = Color.DarkGray,
     inactiveColor: Color = activeColor.copy(alpha = 0.1f),
-    unselectedIndicatorSize: Dp = 8.dp,
-    selectedIndicatorSize: Dp = 10.dp,
+    unselectedIndicatorSize: Dp = 10.dp,
+    selectedIndicatorSize: Dp = 12.dp,
     indicatorCornerRadius: Dp = 2.dp,
     indicatorPadding: Dp = 2.dp,
 ) {

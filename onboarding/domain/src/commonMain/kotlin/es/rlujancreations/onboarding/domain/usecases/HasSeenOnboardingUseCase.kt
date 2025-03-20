@@ -9,7 +9,6 @@ class HasSeenOnboardingUseCase(
     private val repository: OnboardingRepository,
 ) {
     suspend operator fun invoke(): Boolean {
-        println("Ejecutando HasSeenOnboardingUseCase")
         return repository.hasSeenOnboarding()
     }
 }

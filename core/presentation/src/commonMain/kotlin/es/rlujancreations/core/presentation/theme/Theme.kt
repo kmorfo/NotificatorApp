@@ -102,14 +102,6 @@ data class ColorFamily(
     val onColorContainer: Color,
 )
 
-val unspecified_scheme =
-    ColorFamily(
-        Color.Unspecified,
-        Color.Unspecified,
-        Color.Unspecified,
-        Color.Unspecified,
-    )
-
 @Composable
 fun NotificatorAppTheme(
     content:
@@ -137,7 +129,7 @@ fun NotificatorAppTheme(
 
     MaterialTheme(
         colorScheme = if (darkTheme) darkScheme else lightScheme,
-        typography = MontserratTypography(),
+        typography = OpenSansTypography(),
         content = content,
     )
 }

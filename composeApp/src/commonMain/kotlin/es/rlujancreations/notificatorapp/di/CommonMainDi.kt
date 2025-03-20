@@ -7,18 +7,26 @@ import es.rlujancreations.core.presentation.di.coreUiModule
 import es.rlujancreations.database.di.coreDatabaseModule
 import es.rlujancreations.database.di.databaseNativeModule
 import es.rlujancreations.home.presentation.di.homePresentationModule
+import es.rlujancreations.notificatorapp.MainViewModel
 import es.rlujancreations.onboarding.domain.di.onboardingDomainModule
 import es.rlujancreations.onboarding.presentation.di.authPresentationModule
 import es.rlujancreations.onboarding.presentation.di.onboardingPresentationModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.KoinAppDeclaration
+import org.koin.dsl.module
 
 /**
  * Created by Raúl L.C. on 19/1/25.
  */
 
 expect val commonNativeModules: List<Module>
+
+val mainViewModelModule =
+    module {
+        viewModelOf(::MainViewModel)
+    }
 
 fun initKoin(config: KoinAppDeclaration? = null) {
     startKoin {
@@ -33,6 +41,7 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             homePresentationModule,
             onboardingDomainModule,
             onboardingPresentationModule,
+            mainViewModelModule,
             kSecureStorageModule,
             *commonNativeModules.toTypedArray(),
         )
