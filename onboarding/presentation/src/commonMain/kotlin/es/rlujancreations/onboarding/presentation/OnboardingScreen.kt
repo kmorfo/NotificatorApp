@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import es.rlujancreations.core.presentation.ObserveAsEvents
 import es.rlujancreations.onboarding.presentation.components.OnBoardingPager
 import notificatorapp.onboarding.presentation.generated.resources.Res
-import notificatorapp.onboarding.presentation.generated.resources.cloud_messaging
 import notificatorapp.onboarding.presentation.generated.resources.notificator
 import notificatorapp.onboarding.presentation.generated.resources.onboard_app
 import notificatorapp.onboarding.presentation.generated.resources.onboard_device

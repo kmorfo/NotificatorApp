@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +16,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import es.rlujancreations.core.presentation.theme.NotificatorAppTheme
 import es.rlujancreations.notificatorapp.navigation.NavigationRoot
@@ -38,24 +36,26 @@ fun App() {
             if (viewModel.state.isLoading) {
                 AnimatedVisibility(viewModel.state.isLoading) {
                     Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.background),
+                        modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .background(MaterialTheme.colorScheme.background),
                         contentAlignment = Alignment.Center,
                     ) {
                         Image(
                             painter = painterResource(Res.drawable.logo),
                             contentDescription = "Logo",
-                            modifier = Modifier
-                                .aspectRatio(1f)
-                                .padding(25.dp)
-                                .shadow(
-                                    elevation = 25.dp,
-                                    shape = CircleShape,
-                                    spotColor = Color(0xff9ABCC7),
-                                    ambientColor = Color(0xff9ABCC7),
-                                )
-                                .clip(CircleShape),
+                            modifier =
+                                Modifier
+                                    .aspectRatio(1f)
+                                    .padding(25.dp)
+                                    .shadow(
+                                        elevation = 25.dp,
+                                        shape = CircleShape,
+                                        spotColor = Color(0xff9ABCC7),
+                                        ambientColor = Color(0xff9ABCC7),
+                                    )
+                                    .clip(CircleShape),
                         )
                     }
                 }
@@ -67,7 +67,6 @@ fun App() {
             }
         }
     }
-
 }
 
 private fun getStartDestination(state: MainState): Any {

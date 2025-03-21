@@ -2,15 +2,15 @@ package es.rlujancreations.core.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
-val primaryLight = Color(0xFF6E5D00)
+val primaryLight = Color(0xFFffd900)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFFFDE3F)
 val onPrimaryContainerLight = Color(0xFF736100)
-val secondaryLight = Color(0xFFAE2444)
+val secondaryLight = Color(0xFFbe274a)
 val onSecondaryLight = Color(0xFFFFFFFF)
 val secondaryContainerLight = Color(0xFFCF3F5A)
 val onSecondaryContainerLight = Color(0xFFFFFBFF)
-val tertiaryLight = Color(0xFF8F4D00)
+val tertiaryLight = Color(0xFFff8800)
 val onTertiaryLight = Color(0xFFFFFFFF)
 val tertiaryContainerLight = Color(0xFFFA8C09)
 val onTertiaryContainerLight = Color(0xFF5F3100)
@@ -38,7 +38,7 @@ val surfaceContainerLight = Color(0xFFF5EDDD)
 val surfaceContainerHighLight = Color(0xFFEFE8D7)
 val surfaceContainerHighestLight = Color(0xFFE9E2D1)
 
-val primaryDark = Color(0xFFFFFAFF)
+val primaryDark = Color(0xFFffd900)
 val onPrimaryDark = Color(0xFF3A3000)
 val primaryContainerDark = Color(0xFFFFDE3F)
 val onPrimaryContainerDark = Color(0xFF736100)

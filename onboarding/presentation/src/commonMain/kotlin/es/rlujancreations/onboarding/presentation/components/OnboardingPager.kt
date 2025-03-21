@@ -116,12 +116,13 @@ fun OnBoardingPager(
                             style = TextStyle(color = MaterialTheme.colorScheme.tertiary),
                             fontWeight = FontWeight.Bold,
                             fontSize = 16.sp,
-                            modifier = Modifier
-                                .clip(Shapes.extraLarge)
-                                .background(
-                                    MaterialTheme.colorScheme.background.copy(alpha = 0.4f),
-                                )
-                                .padding(12.dp),
+                            modifier =
+                                Modifier
+                                    .clip(Shapes.extraLarge)
+                                    .background(
+                                        MaterialTheme.colorScheme.background.copy(alpha = 0.4f),
+                                    )
+                                    .padding(12.dp),
                         )
                     }
                     HorizontalPagerIndicator(
@@ -130,7 +131,7 @@ fun OnBoardingPager(
                         targetPage = pagerState.targetPage,
                         currentPageOffsetFraction = pagerState.currentPageOffsetFraction,
                         activeColor = MaterialTheme.colorScheme.tertiary,
-                        inactiveColor = MaterialTheme.colorScheme.primary,
+                        inactiveColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
                     )
                     TextButton(
                         onClick = {
@@ -144,12 +145,13 @@ fun OnBoardingPager(
                             style = TextStyle(color = MaterialTheme.colorScheme.tertiary),
                             fontWeight = FontWeight.Bold,
                             fontSize = 16.sp,
-                            modifier = Modifier
-                                .clip(Shapes.extraLarge)
-                                .background(
-                                    MaterialTheme.colorScheme.background.copy(alpha = 0.4f),
-                                )
-                                .padding(12.dp),
+                            modifier =
+                                Modifier
+                                    .clip(Shapes.extraLarge)
+                                    .background(
+                                        MaterialTheme.colorScheme.background.copy(alpha = 0.4f),
+                                    )
+                                    .padding(12.dp),
                         )
                     }
                 }
@@ -164,13 +166,14 @@ private fun ContentOnboarding(
     information: OnboardingPagerInformation,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth(
-                if (windowClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) 0.5f else 1f,
-            )
-            .clip(Shapes.medium)
-            .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
-            .padding(20.dp),
+        modifier =
+            Modifier
+                .fillMaxWidth(
+                    if (windowClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) 0.5f else 1f,
+                )
+                .clip(Shapes.medium)
+                .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
+                .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -227,7 +230,9 @@ private fun HorizontalPagerIndicator(
                     val offsetPercentage = 1f - pageOffset.coerceIn(0f, 1f)
 
                     val size =
-                        unselectedIndicatorSize + ((selectedIndicatorSize - unselectedIndicatorSize) * offsetPercentage)
+                        unselectedIndicatorSize + (
+                            (selectedIndicatorSize - unselectedIndicatorSize) * offsetPercentage
+                        )
 
                     activeColor.copy(alpha = offsetPercentage) to size
                 } else {
