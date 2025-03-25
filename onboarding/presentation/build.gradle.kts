@@ -8,6 +8,8 @@ kotlin {
     sourceSets {
         val desktopMain by getting
 
+        androidMain.dependencies {
+        }
         commonMain.dependencies {
             implementation(compose.components.resources)
 
@@ -15,6 +17,9 @@ kotlin {
             implementation(projects.core.presentation)
 
             implementation(projects.onboarding.domain)
+
+            //Problems with IOS, solved temporary with my own implementation to get screen dimensions
+//            implementation(libs.compose.material3.adaptive.layout)
         }
     }
 }

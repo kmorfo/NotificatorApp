@@ -22,7 +22,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -37,9 +36,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
 import es.rlujancreations.core.presentation.Shapes
+import es.rlujancreations.core.presentation.WindowWidthSizeClass
+import es.rlujancreations.core.presentation.getScreenDimensions
 import es.rlujancreations.onboarding.presentation.OnboardingPagerInformation
 import kotlinx.coroutines.launch
 import notificatorapp.onboarding.presentation.generated.resources.Res
@@ -59,7 +58,7 @@ fun OnBoardingPager(
     modifier: Modifier = Modifier,
     onFinish: () -> Unit,
 ) {
-    val windowClass = currentWindowAdaptiveInfo().windowSizeClass
+    val windowClass = getScreenDimensions().windowWidthSizeClass
 
     val pagerState = rememberPagerState { pages.size }
     val coroutineScope = rememberCoroutineScope()
@@ -75,7 +74,7 @@ fun OnBoardingPager(
                 contentScale = ContentScale.FillBounds,
             )
 
-            if (windowClass.windowWidthSizeClass != WindowWidthSizeClass.EXPANDED) {
+            if (windowClass != WindowWidthSizeClass.Expanded) {
                 Column(
                     modifier = Modifier.fillMaxSize().padding(20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -162,14 +161,14 @@ fun OnBoardingPager(
 
 @Composable
 private fun ContentOnboarding(
-    windowClass: WindowSizeClass,
+    windowClass: WindowWidthSizeClass,
     information: OnboardingPagerInformation,
 ) {
     Column(
         modifier =
             Modifier
                 .fillMaxWidth(
-                    if (windowClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) 0.5f else 1f,
+                    if (windowClass == WindowWidthSizeClass.Expanded) 0.5f else 1f,
                 )
                 .clip(Shapes.medium)
                 .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
@@ -232,7 +231,7 @@ private fun HorizontalPagerIndicator(
                     val size =
                         unselectedIndicatorSize + (
                             (selectedIndicatorSize - unselectedIndicatorSize) * offsetPercentage
-                        )
+                            )
 
                     activeColor.copy(alpha = offsetPercentage) to size
                 } else {

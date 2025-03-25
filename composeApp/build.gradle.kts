@@ -12,6 +12,7 @@ kotlin {
         androidMain.dependencies { }
         commonMain.dependencies {
             implementation(libs.napier)
+            implementation(libs.androidx.navigation.compose)
 
             implementation(projects.core.data)
             implementation(projects.core.domain)

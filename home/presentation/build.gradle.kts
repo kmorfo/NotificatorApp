@@ -15,8 +15,8 @@ kotlin {
             implementation(projects.core.presentation)
 
             // Adaptive navigation components
-            implementation(libs.compose.material3.adaptive.nav.suite)
-            implementation(libs.compose.material3.adaptive.navigation)
+//            implementation(libs.compose.material3.adaptive.nav.suite)
+//            implementation(libs.compose.material3.adaptive.navigation)
         }
     }
 }
