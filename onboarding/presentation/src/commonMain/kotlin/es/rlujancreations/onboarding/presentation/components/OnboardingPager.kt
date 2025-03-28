@@ -2,12 +2,14 @@ package es.rlujancreations.onboarding.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,6 +22,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -67,24 +70,18 @@ fun OnBoardingPager(
         Box(modifier = modifier.background(MaterialTheme.colorScheme.background)) {
             val information = pages[index]
 
-            Image(
-                painter = painterResource(information.image),
-                contentDescription = "Onboarding " + stringResource(information.title),
-                modifier = Modifier.fillMaxSize().blur(radius = 16.dp),
-                contentScale = ContentScale.FillBounds,
-            )
-
             if (windowClass != WindowWidthSizeClass.Expanded) {
                 Column(
                     modifier = Modifier.fillMaxSize().padding(20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Top,
                 ) {
+                    Spacer(modifier = Modifier.height(32.dp))
                     ContentOnboarding(windowClass, information)
                 }
             } else {
                 Row(
-                    modifier = Modifier.fillMaxSize().padding(20.dp),
+                    modifier = Modifier.fillMaxSize().padding(start = 20.dp),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -106,22 +103,18 @@ fun OnBoardingPager(
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp),
                         onClick = onFinish,
                     ) {
-                        Text(stringResource(Res.string.btn_getStarted))
+                        Text(
+                            stringResource(Res.string.btn_getStarted),
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                        )
                     }
                 } else {
-                    TextButton(onClick = onFinish) {
+                    OutlinedButton(onClick = onFinish) {
                         Text(
                             text = stringResource(Res.string.btn_skip),
-                            style = TextStyle(color = MaterialTheme.colorScheme.tertiary),
                             fontWeight = FontWeight.Bold,
                             fontSize = 16.sp,
-                            modifier =
-                                Modifier
-                                    .clip(Shapes.extraLarge)
-                                    .background(
-                                        MaterialTheme.colorScheme.background.copy(alpha = 0.4f),
-                                    )
-                                    .padding(12.dp),
                         )
                     }
                     HorizontalPagerIndicator(
@@ -132,7 +125,7 @@ fun OnBoardingPager(
                         activeColor = MaterialTheme.colorScheme.tertiary,
                         inactiveColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
                     )
-                    TextButton(
+                    Button(
                         onClick = {
                             coroutineScope.launch {
                                 pagerState.animateScrollToPage(pagerState.currentPage + 1)
@@ -141,16 +134,8 @@ fun OnBoardingPager(
                     ) {
                         Text(
                             text = stringResource(Res.string.btn_next),
-                            style = TextStyle(color = MaterialTheme.colorScheme.tertiary),
                             fontWeight = FontWeight.Bold,
                             fontSize = 16.sp,
-                            modifier =
-                                Modifier
-                                    .clip(Shapes.extraLarge)
-                                    .background(
-                                        MaterialTheme.colorScheme.background.copy(alpha = 0.4f),
-                                    )
-                                    .padding(12.dp),
                         )
                     }
                 }
@@ -170,32 +155,47 @@ private fun ContentOnboarding(
                 .fillMaxWidth(
                     if (windowClass == WindowWidthSizeClass.Expanded) 0.5f else 1f,
                 )
-                .clip(Shapes.medium)
-                .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
+                .background(
+                    if (windowClass == WindowWidthSizeClass.Expanded)
+                        MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.2f)
+                    else MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f),
+                    shape = Shapes.medium,
+                )
+                .border(1.dp, MaterialTheme.colorScheme.primary, shape = Shapes.medium)
                 .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
             stringResource(information.title),
-            style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onBackground,
+            style = MaterialTheme.typography.headlineMedium,
+            color = if (windowClass == WindowWidthSizeClass.Expanded)
+                MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.background,
         )
         Spacer(modifier = Modifier.size(16.dp))
         Text(
             stringResource(information.subtitle),
             style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onBackground,
+            color = if (windowClass == WindowWidthSizeClass.Expanded)
+                MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.background,
             textAlign = TextAlign.Justify,
         )
     }
     Spacer(modifier = Modifier.size(24.dp))
-    Image(
-        painter = painterResource(information.image),
-        contentDescription = "Onboarding " + stringResource(information.title),
-        contentScale = ContentScale.Fit,
-        modifier = Modifier.aspectRatio(1f).clip(Shapes.medium),
-    )
+    Box(
+        modifier = Modifier.fillMaxHeight().background(
+            if (windowClass == WindowWidthSizeClass.Expanded)
+                MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.background,
+        ),
+        contentAlignment = Alignment.Center,
+    ) {
+        Image(
+            painter = painterResource(information.image),
+            contentDescription = "Onboarding " + stringResource(information.title),
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.aspectRatio(1f).clip(Shapes.medium),
+        )
+    }
 }
 
 @Composable

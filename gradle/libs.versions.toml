@@ -23,7 +23,7 @@ androidx-sqliteBundled = "2.5.0-rc01"
 
 buildconfig = "5.3.5"
 desugar_jdk_libs = "2.1.5"
-koin = "4.0.0"
+koin = "4.0.2"
 
 ktor = "3.0.1"
 ktorClientLogging = "3.0.1"

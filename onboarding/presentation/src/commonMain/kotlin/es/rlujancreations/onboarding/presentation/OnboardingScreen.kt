@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import es.rlujancreations.core.presentation.ObserveAsEvents
 import es.rlujancreations.onboarding.presentation.components.OnBoardingPager
 import notificatorapp.onboarding.presentation.generated.resources.Res
+import notificatorapp.onboarding.presentation.generated.resources.icon_notificator
 import notificatorapp.onboarding.presentation.generated.resources.notificator
 import notificatorapp.onboarding.presentation.generated.resources.onboard_app
 import notificatorapp.onboarding.presentation.generated.resources.onboard_device
@@ -52,7 +53,7 @@ fun OnBoardingScreen(
             OnboardingPagerInformation(
                 title = Res.string.onboarding_title_notificator,
                 subtitle = Res.string.onboarding_subtitle_notificator,
-                image = Res.drawable.notificator,
+                image = Res.drawable.icon_notificator,
             ),
             OnboardingPagerInformation(
                 title = Res.string.onboarding_title_project,

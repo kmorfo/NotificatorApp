@@ -2,34 +2,48 @@ package es.rlujancreations.core.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
-val primaryLight = Color(0xFFffd900)
+// ====================
+// Tema Claro (Light)
+// ====================
+
+// Los colores primarios se basan en los tonos del logotipo de Firebase:
+// - Firebase Naranja: #FF9100 (color principal)
+// - Firebase Amarillo: #FFC400 (color contenedor primario)
+// - Firebase Red: #DD2C00 (color secundario)
+// - Google Ecosystem Blue: #4285F4 (color terciario)
+
+val primaryLight = Color(0xFFFF9100)             // Firebase Naranja
 val onPrimaryLight = Color(0xFFFFFFFF)
-val primaryContainerLight = Color(0xFFFFDE3F)
-val onPrimaryContainerLight = Color(0xFF736100)
-val secondaryLight = Color(0xFFbe274a)
+val primaryContainerLight = Color(0xFFFFC400)      // Firebase Amarillo
+val onPrimaryContainerLight = Color(0xFF4D2E00)    // Tonalidad oscura para buen contraste
+
+val secondaryLight = Color(0xFFDD2C00)             // Firebase Red
 val onSecondaryLight = Color(0xFFFFFFFF)
-val secondaryContainerLight = Color(0xFFCF3F5A)
+val secondaryContainerLight = Color(0xFFFF8A65)      // Variante más suave del rojo
 val onSecondaryContainerLight = Color(0xFFFFFBFF)
-val tertiaryLight = Color(0xFFff8800)
+
+val tertiaryLight = Color(0xFF4285F4)              // Google Ecosystem Blue
 val onTertiaryLight = Color(0xFFFFFFFF)
-val tertiaryContainerLight = Color(0xFFFA8C09)
-val onTertiaryContainerLight = Color(0xFF5F3100)
+val tertiaryContainerLight = Color(0xFF8AB4F8)       // Variante más clara del azul
+val onTertiaryContainerLight = Color(0xFF1A237E)     // Azul oscuro para contraste
+
 val errorLight = Color(0xFFBA1A1A)
 val onErrorLight = Color(0xFFFFFFFF)
 val errorContainerLight = Color(0xFFFFDAD6)
 val onErrorContainerLight = Color(0xFF93000A)
-val backgroundLight = Color(0xFFFFF9EE)
-val onBackgroundLight = Color(0xFF1E1B11)
+
+val backgroundLight = Color(0xFFFFFFFF)
+val onBackgroundLight = Color(0xFF202124)
 val surfaceLight = Color(0xFFFFF9EE)
-val onSurfaceLight = Color(0xFF1E1B11)
-val surfaceVariantLight = Color(0xFFEBE2C8)
+val onSurfaceLight = Color(0xFF202124)
+val surfaceVariantLight = Color(0xFFEDEDED)
 val onSurfaceVariantLight = Color(0xFF4C4733)
 val outlineLight = Color(0xFF7D7761)
 val outlineVariantLight = Color(0xFFCFC6AD)
 val scrimLight = Color(0xFF000000)
 val inverseSurfaceLight = Color(0xFF343025)
 val inverseOnSurfaceLight = Color(0xFFF8F0DF)
-val inversePrimaryLight = Color(0xFFE5C524)
+val inversePrimaryLight = Color(0xFFFFA000)
 val surfaceDimLight = Color(0xFFE0D9C9)
 val surfaceBrightLight = Color(0xFFFFF9EE)
 val surfaceContainerLowestLight = Color(0xFFFFFFFF)
@@ -38,23 +52,32 @@ val surfaceContainerLight = Color(0xFFF5EDDD)
 val surfaceContainerHighLight = Color(0xFFEFE8D7)
 val surfaceContainerHighestLight = Color(0xFFE9E2D1)
 
-val primaryDark = Color(0xFFffd900)
-val onPrimaryDark = Color(0xFF3A3000)
-val primaryContainerDark = Color(0xFFFFDE3F)
-val onPrimaryContainerDark = Color(0xFF736100)
+
+// ====================
+// Tema Oscuro (Dark)
+// ====================
+
+val primaryDark = Color(0xFFFF9100)
+val onPrimaryDark = Color(0xFF4D2E00)
+val primaryContainerDark = Color(0xFFFFC400)
+val onPrimaryContainerDark = Color(0xFF6D4C00)
+
 val secondaryDark = Color(0xFFFFB2B9)
 val onSecondaryDark = Color(0xFF67001F)
 val secondaryContainerDark = Color(0xFFF55B75)
 val onSecondaryContainerDark = Color(0xFF34000B)
-val tertiaryDark = Color(0xFFFFB77B)
-val onTertiaryDark = Color(0xFF4D2700)
-val tertiaryContainerDark = Color(0xFFFA8C09)
-val onTertiaryContainerDark = Color(0xFF5F3100)
+
+val tertiaryDark = Color(0xFF82B1FF)               // Variante más clara para buen contraste en fondo oscuro
+val onTertiaryDark = Color(0xFF002171)
+val tertiaryContainerDark = Color(0xFF90CAF9)
+val onTertiaryContainerDark = Color(0xFF002171)
+
 val errorDark = Color(0xFFFFB4AB)
 val onErrorDark = Color(0xFF690005)
 val errorContainerDark = Color(0xFF93000A)
 val onErrorContainerDark = Color(0xFFFFDAD6)
-val backgroundDark = Color(0xFF16130A)
+
+val backgroundDark = Color(0xFF3E3E3E)
 val onBackgroundDark = Color(0xFFE9E2D1)
 val surfaceDark = Color(0xFF16130A)
 val onSurfaceDark = Color(0xFFE9E2D1)

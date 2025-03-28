@@ -108,7 +108,6 @@ fun NotificatorAppTheme(
         @Composable()
         () -> Unit,
 ) {
-//    darkTheme: Boolean = isSystemInDarkTheme(),
     val getUserPreferencesUseCase = koinInject<GetUserPreferencesUseCase>()
 
     val userSettings by remember {
@@ -129,7 +128,7 @@ fun NotificatorAppTheme(
 
     MaterialTheme(
         colorScheme = if (darkTheme) darkScheme else lightScheme,
-        typography = OpenSansTypography(),
+        typography = FirebaseTypography(),
         content = content,
     )
 }

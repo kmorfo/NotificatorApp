@@ -16,6 +16,8 @@ import notificatorapp.core.presentation.generated.resources.ic_channel
 import notificatorapp.core.presentation.generated.resources.ic_devices
 import notificatorapp.core.presentation.generated.resources.ic_logo
 import notificatorapp.core.presentation.generated.resources.ic_project
+import notificatorapp.core.presentation.generated.resources.ic_rlc_logo
+import notificatorapp.core.presentation.generated.resources.ic_rlujan_logo
 import notificatorapp.core.presentation.generated.resources.ic_send
 import notificatorapp.core.presentation.generated.resources.ic_task
 import org.jetbrains.compose.resources.painterResource
@@ -52,6 +54,16 @@ fun DevicesIcon(): AppIcon {
 @Composable
 fun LogoIcon(): AppIcon {
     return AppIcon.PainterIcon(painterResource(Res.drawable.ic_logo))
+}
+
+@Composable
+fun LogoRLCIcon(): AppIcon {
+    return AppIcon.PainterIcon(painterResource(Res.drawable.ic_rlc_logo))
+}
+
+@Composable
+fun LogoRLujanIcon(): AppIcon {
+    return AppIcon.PainterIcon(painterResource(Res.drawable.ic_rlujan_logo))
 }
 
 @Composable
