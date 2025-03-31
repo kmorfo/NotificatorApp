@@ -3,6 +3,8 @@ package es.rlujancreations.core.presentation
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,12 +16,15 @@ import notificatorapp.core.presentation.generated.resources.Res
 import notificatorapp.core.presentation.generated.resources.ic_apps
 import notificatorapp.core.presentation.generated.resources.ic_channel
 import notificatorapp.core.presentation.generated.resources.ic_devices
+import notificatorapp.core.presentation.generated.resources.ic_eye_closed
+import notificatorapp.core.presentation.generated.resources.ic_eye_opened
 import notificatorapp.core.presentation.generated.resources.ic_logo
 import notificatorapp.core.presentation.generated.resources.ic_project
 import notificatorapp.core.presentation.generated.resources.ic_rlc_logo
 import notificatorapp.core.presentation.generated.resources.ic_rlujan_logo
 import notificatorapp.core.presentation.generated.resources.ic_send
 import notificatorapp.core.presentation.generated.resources.ic_task
+import notificatorapp.core.presentation.generated.resources.ic_unlock
 import org.jetbrains.compose.resources.painterResource
 
 /**
@@ -82,8 +87,33 @@ fun TaskIcon(): AppIcon {
 }
 
 @Composable
+fun EmailIcon(): AppIcon {
+    return AppIcon.VectorIcon(Icons.Default.Email)
+}
+
+@Composable
+fun LockIcon(): AppIcon {
+    return AppIcon.VectorIcon(Icons.Default.Lock)
+}
+
+@Composable
+fun UnLockIcon(): AppIcon {
+    return AppIcon.PainterIcon(painterResource(Res.drawable.ic_unlock))
+}
+
+@Composable
+fun EyeClosedIcon(): AppIcon {
+    return AppIcon.PainterIcon(painterResource(Res.drawable.ic_eye_closed))
+}
+
+@Composable
+fun EyeOpenedIcon(): AppIcon {
+    return AppIcon.PainterIcon(painterResource(Res.drawable.ic_eye_opened))
+}
+
+@Composable
 fun IconDisplay(
-    appIcon: AppIcon,
+    appIcon: AppIcon?,
     contentDescription: String? = null,
     tint: Color = Color.Unspecified,
     modifier: Modifier = Modifier.size(32.dp),
@@ -104,5 +134,7 @@ fun IconDisplay(
                 tint = Color.Unspecified,
                 modifier = modifier,
             )
+
+        else -> {}
     }
 }

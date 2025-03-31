@@ -2,56 +2,45 @@ package es.rlujancreations.onboarding.presentation.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
-import androidx.compose.runtime.getValue
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import es.rlujancreations.core.presentation.EmailIcon
 import es.rlujancreations.core.presentation.IconDisplay
+import es.rlujancreations.core.presentation.LockIcon
 import es.rlujancreations.core.presentation.LogoIcon
+import es.rlujancreations.core.presentation.LogoRLujanIcon
+import es.rlujancreations.core.presentation.Shapes
 import es.rlujancreations.core.presentation.WindowWidthSizeClass
+import es.rlujancreations.core.presentation.components.NotificatorActionButton
+import es.rlujancreations.core.presentation.components.NotificatorOutlinedTextField
+import es.rlujancreations.core.presentation.components.NotificatorPasswordTextField
+import es.rlujancreations.core.presentation.components.NotificatorTextField
 import es.rlujancreations.core.presentation.extensions.rotateVertically
 import es.rlujancreations.core.presentation.getScreenDimensions
-import notificatorapp.auth.presentation.generated.resources.Res
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -223,9 +212,7 @@ private fun LoginForm(
     onAction: (LoginAction) -> Unit,
     modifier: Modifier,
 ) {
-
     val focusManager = LocalFocusManager.current
-
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -233,16 +220,63 @@ private fun LoginForm(
         modifier =
             modifier
                 .padding(16.dp)
+                .background(
+                    MaterialTheme.colorScheme.background,
+                    shape = Shapes.medium,
+                )
                 .border(
                     width = 2.dp,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    shape = RoundedCornerShape(15.dp),
-                )
-                .background(
-                    MaterialTheme.colorScheme.onBackground,
-                    shape = RoundedCornerShape(15.dp),
+                    color = MaterialTheme.colorScheme.primary,
+                    shape = Shapes.medium,
                 ),
-    ) {
 
+        ) {
+        IconDisplay(
+            LogoRLujanIcon(),
+            contentDescription = "RLujanCreations Logo",
+            modifier =
+                Modifier
+                    .padding(top = 32.dp)
+                    .widthIn(min = 120.dp, max = 250.dp),
+        )
+        Column(
+            modifier = Modifier.padding(32.dp),
+        ) {
+            NotificatorTextField(
+                value = state.email,
+                onValueChange = { onAction(LoginAction.OnEmailChange(it)) },
+                placeholder = "Email",
+                contentDescription = "Admin email",
+                title = "Email",
+                leadingIcon = EmailIcon(),
+                trailingIcon = null,
+                error = state.emailError,
+                maxLines = 1,
+                minLines = 1,
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            NotificatorPasswordTextField(
+                value = state.password,
+                onValueChange = { onAction(LoginAction.OnPasswordChange(it)) },
+                contentDescription = "Password field",
+                title = "Contraseña",
+                isPasswordVisible = state.isPasswordVisible,
+                keyboardActions = KeyboardActions(
+                    onAny = {
+                        focusManager.clearFocus()
+                        if (state.canLogin) onAction(LoginAction.OnLoginClick)
+                    },
+                ),
+                onTogglePasswordVisibility = { onAction(LoginAction.OnTogglePasswordVisibility) },
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+            NotificatorActionButton(
+                text = "Login",
+                isLoading = state.isLoggingIn,
+                enabled = state.canLogin,
+                onClick = { onAction(LoginAction.OnLoginClick) },
+            )
+            Spacer(modifier = Modifier.height(32.dp))
+        }
     }
 }

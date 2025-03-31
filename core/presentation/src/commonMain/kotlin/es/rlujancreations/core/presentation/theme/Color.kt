@@ -3,29 +3,29 @@ package es.rlujancreations.core.presentation.theme
 import androidx.compose.ui.graphics.Color
 
 // ====================
-// Tema Claro (Light)
+// Light Theme (Light)
 // ====================
 
-// Los colores primarios se basan en los tonos del logotipo de Firebase:
-// - Firebase Naranja: #FF9100 (color principal)
-// - Firebase Amarillo: #FFC400 (color contenedor primario)
-// - Firebase Red: #DD2C00 (color secundario)
-// - Google Ecosystem Blue: #4285F4 (color terciario)
+// The primary colors are based on the shades of the logo of Firebase:
+// - Firebase orange: #FF9100 (primary color)
+// - Firebase Yellow: #FFC400 (primary container color)
+// - Firebase Red: #DD2C00 (secondary color)
+// - Google Ecosystem Blue: #4285F4 (tertiary color)
 
-val primaryLight = Color(0xFFFF9100)             // Firebase Naranja
+val primaryLight = Color(0xFFFF9100)             // Firebase Orange
 val onPrimaryLight = Color(0xFFFFFFFF)
-val primaryContainerLight = Color(0xFFFFC400)      // Firebase Amarillo
-val onPrimaryContainerLight = Color(0xFF4D2E00)    // Tonalidad oscura para buen contraste
+val primaryContainerLight = Color(0xFFFFC400)      // Firebase Yellow
+val onPrimaryContainerLight = Color(0xFF4D2E00)    // Dark tone for good contrast
 
 val secondaryLight = Color(0xFFDD2C00)             // Firebase Red
 val onSecondaryLight = Color(0xFFFFFFFF)
-val secondaryContainerLight = Color(0xFFFF8A65)      // Variante más suave del rojo
+val secondaryContainerLight = Color(0xFFFF8A65)      // Softer variant of red
 val onSecondaryContainerLight = Color(0xFFFFFBFF)
 
 val tertiaryLight = Color(0xFF4285F4)              // Google Ecosystem Blue
 val onTertiaryLight = Color(0xFFFFFFFF)
-val tertiaryContainerLight = Color(0xFF8AB4F8)       // Variante más clara del azul
-val onTertiaryContainerLight = Color(0xFF1A237E)     // Azul oscuro para contraste
+val tertiaryContainerLight = Color(0xFF8AB4F8)       // Lighter variant of blue
+val onTertiaryContainerLight = Color(0xFF1A237E)     // Dark blue for contrast
 
 val errorLight = Color(0xFFBA1A1A)
 val onErrorLight = Color(0xFFFFFFFF)
@@ -54,7 +54,7 @@ val surfaceContainerHighestLight = Color(0xFFE9E2D1)
 
 
 // ====================
-// Tema Oscuro (Dark)
+// Dark Theme (Dark)
 // ====================
 
 val primaryDark = Color(0xFFFF9100)
@@ -67,7 +67,7 @@ val onSecondaryDark = Color(0xFF67001F)
 val secondaryContainerDark = Color(0xFFF55B75)
 val onSecondaryContainerDark = Color(0xFF34000B)
 
-val tertiaryDark = Color(0xFF82B1FF)               // Variante más clara para buen contraste en fondo oscuro
+val tertiaryDark = Color(0xFF82B1FF)               // Lighter variant for good contrast on a dark background
 val onTertiaryDark = Color(0xFF002171)
 val tertiaryContainerDark = Color(0xFF90CAF9)
 val onTertiaryContainerDark = Color(0xFF002171)
@@ -96,3 +96,6 @@ val surfaceContainerLowDark = Color(0xFF1E1B11)
 val surfaceContainerDark = Color(0xFF222015)
 val surfaceContainerHighDark = Color(0xFF2D2A1F)
 val surfaceContainerHighestDark = Color(0xFF383529)
+
+
+val textFieldColor = Color(0xFF000000)
