@@ -1,4 +1,4 @@
-package es.rlujancreations.onboarding.presentation.login
+package es.rlujancreations.auth.presentation.login
 
 import es.rlujancreations.core.presentation.UiText
 

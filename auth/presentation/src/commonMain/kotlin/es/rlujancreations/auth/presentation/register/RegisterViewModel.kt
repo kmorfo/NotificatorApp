@@ -1,4 +1,4 @@
-package es.rlujancreations.onboarding.presentation.recovery
+package es.rlujancreations.auth.presentation.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 
-class RecoveryViewModel : ViewModel() {
+class RegisterViewModel : ViewModel() {
     private var hasLoadedInitialData = false
 
-    private val _state = MutableStateFlow(RecoveryState())
+    private val _state = MutableStateFlow(RegisterState())
     val state =
         _state
             .onStart {
@@ -22,10 +22,10 @@ class RecoveryViewModel : ViewModel() {
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000L),
-                initialValue = RecoveryState(),
+                initialValue = RegisterState(),
             )
 
-    fun onAction(action: RecoveryAction) {
+    fun onAction(action: RegisterAction) {
         when (action) {
             else -> TODO("Handle actions")
         }

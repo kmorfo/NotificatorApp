@@ -1,8 +1,10 @@
-package es.rlujancreations.onboarding.presentation.login
+package es.rlujancreations.auth.presentation.login
+
+import org.jetbrains.compose.resources.StringResource
 
 data class LoginState(
     val email: String = "",
-    val emailError: String? = null,
+    val emailError: StringResource? = null,
     val password: String = "",
     val isPasswordVisible: Boolean = false,
     val canLogin: Boolean = false,

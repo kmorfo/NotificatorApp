@@ -1,4 +1,4 @@
-package es.rlujancreations.onboarding.presentation.login
+package es.rlujancreations.auth.presentation.login
 
 sealed interface LoginAction {
     data class OnEmailChange(val email: String) : LoginAction

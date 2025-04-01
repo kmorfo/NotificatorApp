@@ -1,4 +1,4 @@
-package es.rlujancreations.onboarding.presentation.recovery
+package es.rlujancreations.auth.presentation.register
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -7,19 +7,19 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun RecoveryScreenRoot(viewModel: RecoveryViewModel = koinViewModel()) {
+fun RegisterScreenRoot(viewModel: RegisterViewModel = koinViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    RecoveryScreen(
+    RegisterScreen(
         state = state,
         onAction = viewModel::onAction,
     )
 }
 
 @Composable
-fun RecoveryScreen(
-    state: RecoveryState,
-    onAction: (RecoveryAction) -> Unit,
+fun RegisterScreen(
+    state: RegisterState,
+    onAction: (RegisterAction) -> Unit,
 ) {
-    Text("Recovery Screen")
+    Text("Register Screen")
 }

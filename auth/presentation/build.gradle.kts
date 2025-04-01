@@ -11,6 +11,8 @@ kotlin {
         commonMain.dependencies {
             implementation(compose.components.resources)
 
+            implementation(projects.auth.domain)
+
             implementation(projects.core.domain)
             implementation(projects.core.presentation)
         }

@@ -1,5 +1,6 @@
 package es.rlujancreations.core.presentation.components
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -73,11 +74,13 @@ fun NotificatorTextField(
         keyboardActions = keyboardActions,
         colors = TextFieldDefaults.colors(
             focusedContainerColor = backgroundColor,
-            unfocusedContainerColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+            unfocusedContainerColor = if (isSystemInDarkTheme())
+                MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+            else MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f),
             unfocusedPlaceholderColor = textFieldColor.copy(alpha = 0.6f),
             unfocusedLabelColor = textFieldColor.copy(alpha = 0.5f),
             focusedTextColor = textFieldColor,
-            unfocusedTextColor = textFieldColor.copy(alpha = 0.7f)
+            unfocusedTextColor = textFieldColor.copy(alpha = 0.7f),
         ),
     )
 }
@@ -134,10 +137,12 @@ fun NotificatorOutlinedTextField(
         keyboardActions = keyboardActions,
         colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = backgroundColor,
-            unfocusedContainerColor = backgroundColor.copy(alpha = 0.7f),
+            unfocusedContainerColor = if (isSystemInDarkTheme())
+                MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+            else MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f),
             unfocusedLabelColor = textFieldColor.copy(alpha = 0.5f),
             focusedTextColor = textFieldColor,
-            unfocusedTextColor = textFieldColor.copy(alpha = 0.7f)
+            unfocusedTextColor = textFieldColor.copy(alpha = 0.7f),
         ),
     )
 }

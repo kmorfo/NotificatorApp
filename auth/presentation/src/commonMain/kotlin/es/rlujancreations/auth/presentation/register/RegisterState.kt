@@ -1,6 +1,6 @@
-package es.rlujancreations.onboarding.presentation.recovery
+package es.rlujancreations.auth.presentation.register
 
-data class RecoveryState(
+data class RegisterState(
     val paramOne: String = "default",
     val paramTwo: List<String> = emptyList(),
 )

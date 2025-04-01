@@ -1,8 +1,8 @@
-package es.rlujancreations.onboarding.presentation.di
+package es.rlujancreations.auth.presentation.di
 
-import es.rlujancreations.onboarding.presentation.login.LoginViewModel
-import es.rlujancreations.onboarding.presentation.recovery.RecoveryViewModel
-import es.rlujancreations.onboarding.presentation.register.RegisterViewModel
+import es.rlujancreations.auth.presentation.login.LoginViewModel
+import es.rlujancreations.auth.presentation.recovery.RecoveryViewModel
+import es.rlujancreations.auth.presentation.register.RegisterViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
