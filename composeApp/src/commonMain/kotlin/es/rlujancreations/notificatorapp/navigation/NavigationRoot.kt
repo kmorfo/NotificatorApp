@@ -60,7 +60,17 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
             RegisterScreenRoot()
         }
         composable<Screen.Auth.Recovery> {
-            RecoveryScreenRoot()
+            RecoveryScreenRoot(
+                onLoginClick = {
+                    navController.navigate(Screen.Auth.Login) {
+                        popUpTo(Screen.Auth.Recovery) {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                },
+            )
         }
     }
 }

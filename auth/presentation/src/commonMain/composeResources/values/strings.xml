@@ -12,6 +12,7 @@
     <string name="btn_login">Login</string>
     <string name="btn_register">Register</string>
     <string name="btn_recovery">Recovery password</string>
+    <string name="already_have_an_account">Already have an account?</string>
 
     <string name="sign_up">Sign up</string>
     <string name="dont_have_an_account">Don't have an account?</string>
@@ -21,4 +22,6 @@
     <string name="recovery_explanation">A recovery email will be sent to the email address indicated, follow the instructions to reset the password.</string>
 
     <string name="recovery_password">Forgot your password?</string>
+
+
 </resources>
