@@ -13,6 +13,11 @@ class UserDataValidator {
         return emailRegex.matches(email)
     }
 
+    fun isValidUsername(username: String): Boolean {
+        val usernameRegex = Regex("""^[a-zA-Z0-9_.-]+$""")
+        return usernameRegex.matches(username)
+    }
+
     fun validatePassword(password: String): PasswordValidationState {
         val hasMinLength = password.length >= MIN_PASSWORD_LENGTH
         val hasDigit = password.any { it.isDigit() }

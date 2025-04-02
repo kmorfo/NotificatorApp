@@ -7,11 +7,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import es.rlujancreations.home.presentation.HomeScreenRoot
-import es.rlujancreations.onboarding.presentation.OnBoardingRoot
 import es.rlujancreations.auth.presentation.login.LoginScreenRoot
 import es.rlujancreations.auth.presentation.recovery.RecoveryScreenRoot
 import es.rlujancreations.auth.presentation.register.RegisterScreenRoot
+import es.rlujancreations.home.presentation.HomeScreenRoot
+import es.rlujancreations.onboarding.presentation.OnBoardingRoot
 
 /**
  * Created by Raúl L.C. on 19/1/25.
@@ -57,7 +57,24 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
             )
         }
         composable<Screen.Auth.Register> {
-            RegisterScreenRoot()
+            RegisterScreenRoot(
+                onLoginClick = {
+                    navController.navigate(Screen.Auth.Login) {
+                        popUpTo(Screen.Auth.Register) {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                },
+                onSuccessfulRegistration = {
+                    navController.navigate(Screen.Home.Scaffold) {
+                        popUpTo(Screen.Auth) {
+                            inclusive = true
+                        }
+                    }
+                },
+            )
         }
         composable<Screen.Auth.Recovery> {
             RecoveryScreenRoot(

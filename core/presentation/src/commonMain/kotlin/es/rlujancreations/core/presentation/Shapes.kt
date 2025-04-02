@@ -9,11 +9,12 @@ import androidx.compose.ui.unit.dp
  * https://m3.material.io/styles/shape/overview
  * https://m3.material.io/styles/shape/shape-scale-tokens
  */
-val Shapes = Shapes(
-    extraSmall = RoundedCornerShape(4.dp),
-    small = RoundedCornerShape(8.dp),
-    medium = RoundedCornerShape(12.dp),
-    large = RoundedCornerShape(16.dp),
-    extraLarge = RoundedCornerShape(28.dp),
-)
+val Shapes =
+    Shapes(
+        extraSmall = RoundedCornerShape(4.dp),
+        small = RoundedCornerShape(8.dp),
+        medium = RoundedCornerShape(12.dp),
+        large = RoundedCornerShape(16.dp),
+        extraLarge = RoundedCornerShape(28.dp),
+    )
 val ButtonShapeFull = RoundedCornerShape(50)

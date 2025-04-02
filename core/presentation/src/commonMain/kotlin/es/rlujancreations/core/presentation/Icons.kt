@@ -2,9 +2,11 @@ package es.rlujancreations.core.presentation
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -39,6 +41,11 @@ sealed class AppIcon {
 @Composable
 fun CheckIcon(): AppIcon {
     return AppIcon.VectorIcon(Icons.Default.Done)
+}
+
+@Composable
+fun CrossIcon(): AppIcon {
+    return AppIcon.VectorIcon(Icons.Default.Close)
 }
 
 @Composable
@@ -89,6 +96,11 @@ fun TaskIcon(): AppIcon {
 @Composable
 fun EmailIcon(): AppIcon {
     return AppIcon.VectorIcon(Icons.Default.Email)
+}
+
+@Composable
+fun UserIcon(): AppIcon {
+    return AppIcon.VectorIcon(Icons.Default.Person)
 }
 
 @Composable

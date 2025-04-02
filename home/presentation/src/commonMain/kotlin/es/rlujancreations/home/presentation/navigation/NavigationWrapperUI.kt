@@ -1,25 +1,25 @@
 package es.rlujancreations.home.presentation.navigation
 //
-//import androidx.compose.material3.Text
-//import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
-//import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
-//import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
-//import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
-//import androidx.compose.runtime.Composable
-//import androidx.compose.runtime.getValue
-//import androidx.compose.runtime.mutableStateOf
-//import androidx.compose.runtime.remember
-//import androidx.compose.runtime.setValue
-//import androidx.window.core.layout.WindowWidthSizeClass
-//import es.rlujancreations.core.presentation.IconDisplay
-//import org.jetbrains.compose.resources.stringResource
+// import androidx.compose.material3.Text
+// import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+// import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
+// import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
+// import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
+// import androidx.compose.runtime.Composable
+// import androidx.compose.runtime.getValue
+// import androidx.compose.runtime.mutableStateOf
+// import androidx.compose.runtime.remember
+// import androidx.compose.runtime.setValue
+// import androidx.window.core.layout.WindowWidthSizeClass
+// import es.rlujancreations.core.presentation.IconDisplay
+// import org.jetbrains.compose.resources.stringResource
 
 /**
  * Created by Raúl L.C. on 12/3/25.
  */
 
-//@Composable
-//fun NavigationWrapperUI(content: @Composable () -> Unit = {}) {
+// @Composable
+// fun NavigationWrapperUI(content: @Composable () -> Unit = {}) {
 //    var selectedDestination: NotificatorDestinations by remember {
 //        mutableStateOf(NotificatorDestinations.Projects)
 //    }
@@ -55,4 +55,4 @@ package es.rlujancreations.home.presentation.navigation
 //    ) {
 //        content()
 //    }
-//}
+// }

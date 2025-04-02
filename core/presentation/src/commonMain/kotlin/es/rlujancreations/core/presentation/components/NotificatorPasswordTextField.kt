@@ -60,7 +60,6 @@ fun NotificatorPasswordTextField(
         value = value,
         onValueChange = onValueChange,
         modifier = modifier.fillMaxWidth(),
-
         placeholder = { Text(text = placeholder) },
         leadingIcon = {
             IconDisplay(
@@ -97,15 +96,19 @@ fun NotificatorPasswordTextField(
         minLines = minLines,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = backgroundColor,
-            unfocusedContainerColor = if (isSystemInDarkTheme())
-                MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
-            else MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f),
-            unfocusedPlaceholderColor = textFieldColor.copy(alpha = 0.6f),
-            unfocusedLabelColor = textFieldColor.copy(alpha = 0.5f),
-            focusedTextColor = textFieldColor,
-            unfocusedTextColor = textFieldColor.copy(alpha = 0.7f),
-        ),
+        colors =
+            TextFieldDefaults.colors(
+                focusedContainerColor = backgroundColor,
+                unfocusedContainerColor =
+                    if (isSystemInDarkTheme()) {
+                        MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+                    } else {
+                        MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f)
+                    },
+                unfocusedPlaceholderColor = textFieldColor.copy(alpha = 0.6f),
+                unfocusedLabelColor = textFieldColor.copy(alpha = 0.5f),
+                focusedTextColor = textFieldColor,
+                unfocusedTextColor = textFieldColor.copy(alpha = 0.7f),
+            ),
     )
 }

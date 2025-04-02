@@ -24,16 +24,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -156,9 +153,11 @@ private fun ContentOnboarding(
                     if (windowClass == WindowWidthSizeClass.Expanded) 0.5f else 1f,
                 )
                 .background(
-                    if (windowClass == WindowWidthSizeClass.Expanded)
+                    if (windowClass == WindowWidthSizeClass.Expanded) {
                         MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.2f)
-                    else MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f),
+                    } else {
+                        MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f)
+                    },
                     shape = Shapes.medium,
                 )
                 .border(1.dp, MaterialTheme.colorScheme.primary, shape = Shapes.medium)
@@ -169,24 +168,36 @@ private fun ContentOnboarding(
         Text(
             stringResource(information.title),
             style = MaterialTheme.typography.headlineMedium,
-            color = if (windowClass == WindowWidthSizeClass.Expanded)
-                MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.background,
+            color =
+                if (windowClass == WindowWidthSizeClass.Expanded) {
+                    MaterialTheme.colorScheme.onBackground
+                } else {
+                    MaterialTheme.colorScheme.background
+                },
         )
         Spacer(modifier = Modifier.size(16.dp))
         Text(
             stringResource(information.subtitle),
             style = MaterialTheme.typography.titleMedium,
-            color = if (windowClass == WindowWidthSizeClass.Expanded)
-                MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.background,
+            color =
+                if (windowClass == WindowWidthSizeClass.Expanded) {
+                    MaterialTheme.colorScheme.onBackground
+                } else {
+                    MaterialTheme.colorScheme.background
+                },
             textAlign = TextAlign.Justify,
         )
     }
     Spacer(modifier = Modifier.size(24.dp))
     Box(
-        modifier = Modifier.fillMaxHeight().background(
-            if (windowClass == WindowWidthSizeClass.Expanded)
-                MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.background,
-        ),
+        modifier =
+            Modifier.fillMaxHeight().background(
+                if (windowClass == WindowWidthSizeClass.Expanded) {
+                    MaterialTheme.colorScheme.onBackground
+                } else {
+                    MaterialTheme.colorScheme.background
+                },
+            ),
         contentAlignment = Alignment.Center,
     ) {
         Image(
@@ -231,7 +242,7 @@ private fun HorizontalPagerIndicator(
                     val size =
                         unselectedIndicatorSize + (
                             (selectedIndicatorSize - unselectedIndicatorSize) * offsetPercentage
-                            )
+                        )
 
                     activeColor.copy(alpha = offsetPercentage) to size
                 } else {
@@ -243,8 +254,8 @@ private fun HorizontalPagerIndicator(
                 modifier =
                     Modifier
                         .padding(
-                            horizontal = ((selectedIndicatorSize + indicatorPadding * 2) - size) / 2,
                             vertical = size / 4,
+                            horizontal = ((selectedIndicatorSize + indicatorPadding * 2) - size) / 2,
                         )
                         .clip(RoundedCornerShape(indicatorCornerRadius))
                         .background(color)

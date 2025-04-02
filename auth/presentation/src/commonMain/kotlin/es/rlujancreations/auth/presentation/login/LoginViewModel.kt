@@ -3,7 +3,6 @@ package es.rlujancreations.auth.presentation.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import es.rlujancreations.auth.domain.validator.UserDataValidator
-import es.rlujancreations.core.presentation.StringProvider
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -43,9 +42,12 @@ class LoginViewModel(
                 _state.update {
                     it.copy(
                         email = action.email.trim(),
-                        emailError = if (userDataValidator.isValidEmail(email = action.email.trim()))
-                            null
-                        else Res.string.invalid_email,
+                        emailError =
+                            if (userDataValidator.isValidEmail(email = action.email.trim())) {
+                                null
+                            } else {
+                                Res.string.invalid_email
+                            },
                         canLogin =
                             userDataValidator.isValidEmail(email = action.email.trim()) &&
                                 it.password.isNotBlank(),

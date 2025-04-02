@@ -9,10 +9,12 @@ interface ScreenDimensions {
     val windowWidthSizeClass: WindowWidthSizeClass
 }
 
-sealed interface WindowWidthSizeClass{
-    data object Compact: WindowWidthSizeClass
-    data object Medium: WindowWidthSizeClass
-    data object Expanded: WindowWidthSizeClass
+sealed interface WindowWidthSizeClass {
+    data object Compact : WindowWidthSizeClass
+
+    data object Medium : WindowWidthSizeClass
+
+    data object Expanded : WindowWidthSizeClass
 }
 
 expect fun getScreenDimensions(): ScreenDimensions

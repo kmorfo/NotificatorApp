@@ -15,9 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,8 +25,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
@@ -38,13 +33,11 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import es.rlujancreations.core.presentation.EmailIcon
 import es.rlujancreations.core.presentation.IconDisplay
-import es.rlujancreations.core.presentation.LockIcon
 import es.rlujancreations.core.presentation.LogoIcon
 import es.rlujancreations.core.presentation.LogoRLujanIcon
 import es.rlujancreations.core.presentation.Shapes
 import es.rlujancreations.core.presentation.WindowWidthSizeClass
 import es.rlujancreations.core.presentation.components.NotificatorActionButton
-import es.rlujancreations.core.presentation.components.NotificatorOutlinedTextField
 import es.rlujancreations.core.presentation.components.NotificatorPasswordTextField
 import es.rlujancreations.core.presentation.components.NotificatorTextField
 import es.rlujancreations.core.presentation.extensions.rotateVertically
@@ -57,8 +50,8 @@ import notificatorapp.auth.presentation.generated.resources.cd_logo_rlc
 import notificatorapp.auth.presentation.generated.resources.cd_password
 import notificatorapp.auth.presentation.generated.resources.dont_have_an_account
 import notificatorapp.auth.presentation.generated.resources.email
+import notificatorapp.auth.presentation.generated.resources.example_email
 import notificatorapp.auth.presentation.generated.resources.password
-import notificatorapp.auth.presentation.generated.resources.recovery_account
 import notificatorapp.auth.presentation.generated.resources.recovery_password
 import notificatorapp.auth.presentation.generated.resources.sign_up
 import org.jetbrains.compose.resources.stringResource
@@ -227,9 +220,7 @@ fun LoginScreen(
             }
         }
     }
-
 }
-
 
 @Composable
 private fun LoginForm(
@@ -254,8 +245,7 @@ private fun LoginForm(
                     color = MaterialTheme.colorScheme.primary,
                     shape = Shapes.medium,
                 ),
-
-        ) {
+    ) {
         IconDisplay(
             LogoRLujanIcon(),
             contentDescription = stringResource(Res.string.cd_logo_rlc),
@@ -270,7 +260,7 @@ private fun LoginForm(
             NotificatorTextField(
                 value = state.email,
                 onValueChange = { onAction(LoginAction.OnEmailChange(it)) },
-                placeholder = stringResource(Res.string.email),
+                placeholder = stringResource(Res.string.example_email),
                 contentDescription = stringResource(Res.string.cd_email),
                 title = stringResource(Res.string.email),
                 leadingIcon = EmailIcon(),
@@ -286,13 +276,18 @@ private fun LoginForm(
                 contentDescription = stringResource(Res.string.cd_password),
                 title = stringResource(Res.string.password),
                 isPasswordVisible = state.isPasswordVisible,
-                keyboardActions = KeyboardActions(
-                    onAny = {
-                        focusManager.clearFocus()
-                        if (state.canLogin) onAction(LoginAction.OnLoginClick)
-                    },
-                ),
-                onTogglePasswordVisibility = { onAction(LoginAction.OnTogglePasswordVisibility) },
+                keyboardActions =
+                    KeyboardActions(
+                        onAny = {
+                            focusManager.clearFocus()
+                            if (state.canLogin) onAction(LoginAction.OnLoginClick)
+                        },
+                    ),
+                onTogglePasswordVisibility = {
+                    onAction(
+                        LoginAction.OnTogglePasswordVisibility,
+                    )
+                },
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(

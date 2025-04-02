@@ -7,6 +7,7 @@ import org.koin.dsl.module
 /**
  * Created by Raúl L.C. on 31/3/25.
  */
-val authDomainModule = module {
-    factoryOf(::UserDataValidator)
-}
+val authDomainModule =
+    module {
+        factoryOf(::UserDataValidator)
+    }

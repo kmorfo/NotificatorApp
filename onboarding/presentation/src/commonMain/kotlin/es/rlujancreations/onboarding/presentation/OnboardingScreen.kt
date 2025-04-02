@@ -9,7 +9,6 @@ import es.rlujancreations.core.presentation.ObserveAsEvents
 import es.rlujancreations.onboarding.presentation.components.OnBoardingPager
 import notificatorapp.onboarding.presentation.generated.resources.Res
 import notificatorapp.onboarding.presentation.generated.resources.icon_notificator
-import notificatorapp.onboarding.presentation.generated.resources.notificator
 import notificatorapp.onboarding.presentation.generated.resources.onboard_app
 import notificatorapp.onboarding.presentation.generated.resources.onboard_device
 import notificatorapp.onboarding.presentation.generated.resources.onboard_message

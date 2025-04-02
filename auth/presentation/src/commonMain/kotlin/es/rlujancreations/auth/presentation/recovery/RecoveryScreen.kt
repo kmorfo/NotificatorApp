@@ -26,7 +26,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import es.rlujancreations.auth.presentation.login.LoginAction
 import es.rlujancreations.core.presentation.EmailIcon
 import es.rlujancreations.core.presentation.IconDisplay
 import es.rlujancreations.core.presentation.LogoIcon
@@ -45,6 +44,7 @@ import notificatorapp.auth.presentation.generated.resources.btn_recovery
 import notificatorapp.auth.presentation.generated.resources.cd_email
 import notificatorapp.auth.presentation.generated.resources.cd_logo_rlc
 import notificatorapp.auth.presentation.generated.resources.email
+import notificatorapp.auth.presentation.generated.resources.example_email
 import notificatorapp.auth.presentation.generated.resources.recovery_account
 import notificatorapp.auth.presentation.generated.resources.recovery_explanation
 import org.jetbrains.compose.resources.stringResource
@@ -209,8 +209,6 @@ fun RecoveryScreen(
             }
         }
     }
-
-
 }
 
 @Composable
@@ -236,8 +234,7 @@ private fun RecoveryForm(
                     color = MaterialTheme.colorScheme.primary,
                     shape = Shapes.medium,
                 ),
-
-        ) {
+    ) {
         IconDisplay(
             LogoRLujanIcon(),
             contentDescription = stringResource(Res.string.cd_logo_rlc),
@@ -293,7 +290,7 @@ private fun RecoveryForm(
             NotificatorTextField(
                 value = state.email,
                 onValueChange = { onAction(RecoveryAction.OnEmailChanged(it)) },
-                placeholder = stringResource(Res.string.email),
+                placeholder = stringResource(Res.string.example_email),
                 contentDescription = stringResource(Res.string.cd_email),
                 title = stringResource(Res.string.email),
                 leadingIcon = EmailIcon(),

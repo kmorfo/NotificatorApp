@@ -18,7 +18,7 @@ kotlin {
 
             implementation(projects.onboarding.domain)
 
-            //Problems with IOS, solved temporary with my own implementation to get screen dimensions
+            // Problems with IOS, solved temporary with my own implementation to get screen dimensions
 //            implementation(libs.compose.material3.adaptive.layout)
         }
     }

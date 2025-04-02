@@ -48,7 +48,10 @@ fun NotificatorActionButton(
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary,
                     disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
-                    disabledContentColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
+                    disabledContentColor =
+                        MaterialTheme.colorScheme.onBackground.copy(
+                            alpha = 0.5f,
+                        ),
                 )
             },
         border =

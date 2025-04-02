@@ -14,11 +14,12 @@ class IOSScreenDimensions : ScreenDimensions {
         get() = (UIScreen.mainScreen.bounds.useContents { size.height } - 65).toInt()
 
     override val windowWidthSizeClass: WindowWidthSizeClass
-        get() = when {
-            screenWidthDp < 600 -> WindowWidthSizeClass.Compact
-            screenWidthDp < 840 -> WindowWidthSizeClass.Medium
-            else -> WindowWidthSizeClass.Expanded
-        }
+        get() =
+            when {
+                screenWidthDp < 600 -> WindowWidthSizeClass.Compact
+                screenWidthDp < 840 -> WindowWidthSizeClass.Medium
+                else -> WindowWidthSizeClass.Expanded
+            }
 }
 
 actual fun getScreenDimensions(): ScreenDimensions {

@@ -72,19 +72,22 @@ fun NotificatorTextField(
         minLines = minLines,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = backgroundColor,
-            unfocusedContainerColor = if (isSystemInDarkTheme())
-                MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
-            else MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f),
-            unfocusedPlaceholderColor = textFieldColor.copy(alpha = 0.6f),
-            unfocusedLabelColor = textFieldColor.copy(alpha = 0.5f),
-            focusedTextColor = textFieldColor,
-            unfocusedTextColor = textFieldColor.copy(alpha = 0.7f),
-        ),
+        colors =
+            TextFieldDefaults.colors(
+                focusedContainerColor = backgroundColor,
+                unfocusedContainerColor =
+                    if (isSystemInDarkTheme()) {
+                        MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+                    } else {
+                        MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f)
+                    },
+                unfocusedPlaceholderColor = textFieldColor.copy(alpha = 0.6f),
+                unfocusedLabelColor = textFieldColor.copy(alpha = 0.5f),
+                focusedTextColor = textFieldColor,
+                unfocusedTextColor = textFieldColor.copy(alpha = 0.7f),
+            ),
     )
 }
-
 
 @Composable
 fun NotificatorOutlinedTextField(
@@ -135,14 +138,18 @@ fun NotificatorOutlinedTextField(
         minLines = minLines,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedContainerColor = backgroundColor,
-            unfocusedContainerColor = if (isSystemInDarkTheme())
-                MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
-            else MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f),
-            unfocusedLabelColor = textFieldColor.copy(alpha = 0.5f),
-            focusedTextColor = textFieldColor,
-            unfocusedTextColor = textFieldColor.copy(alpha = 0.7f),
-        ),
+        colors =
+            OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = backgroundColor,
+                unfocusedContainerColor =
+                    if (isSystemInDarkTheme()) {
+                        MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+                    } else {
+                        MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f)
+                    },
+                unfocusedLabelColor = textFieldColor.copy(alpha = 0.5f),
+                focusedTextColor = textFieldColor,
+                unfocusedTextColor = textFieldColor.copy(alpha = 0.7f),
+            ),
     )
 }

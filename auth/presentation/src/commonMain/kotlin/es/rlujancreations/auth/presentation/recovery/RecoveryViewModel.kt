@@ -42,10 +42,16 @@ class RecoveryViewModel(
                 _state.update {
                     it.copy(
                         email = action.email.trim(),
-                        emailError = if (userDataValidator.isValidEmail(email = action.email.trim()))
-                            null
-                        else Res.string.invalid_email,
-                        canRecovery = userDataValidator.isValidEmail(email = action.email.trim()),
+                        emailError =
+                            if (userDataValidator.isValidEmail(email = action.email.trim())) {
+                                null
+                            } else {
+                                Res.string.invalid_email
+                            },
+                        canRecovery =
+                            userDataValidator.isValidEmail(
+                                email = action.email.trim(),
+                            ),
                     )
                 }
             }
@@ -56,6 +62,5 @@ class RecoveryViewModel(
     }
 
     private fun recovery() {
-
     }
 }
