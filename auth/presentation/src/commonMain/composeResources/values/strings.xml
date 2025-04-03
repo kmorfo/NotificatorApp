@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="cd_logo_rlc">RLujanCreations Logo</string>">
+    <string name="hi_there">Hi there!</string>
+    <string name="welcome_to_notificator">Welcome to NOTIFICATOR!</string>
+    <string name="notificator_welcome_text">Welcome to NOTIFICATOR! The best way to manage your notifications.</string>
 
     <string name="invalid_email">Invalid email</string>
     <string name="email">Email</string>

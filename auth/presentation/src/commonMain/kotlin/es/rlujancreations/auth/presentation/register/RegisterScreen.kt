@@ -137,13 +137,13 @@ fun RegisterScreen(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
                                 text = "Notificator",
-                                fontSize = 40.sp,
+                                fontSize = 32.sp,
                                 color = MaterialTheme.colorScheme.background,
                                 fontWeight = FontWeight.SemiBold,
                             )
                             Text(
                                 text = "APP",
-                                fontSize = 30.sp,
+                                fontSize = 26.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.background,
                                 modifier = Modifier.rotateVertically(),
@@ -286,13 +286,16 @@ private fun RegisterForm(
                         .padding(top = 32.dp)
                         .widthIn(min = 120.dp, max = 250.dp),
             )
+        else
+            Spacer(modifier = Modifier.height(24.dp))
         Column(
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier.padding(horizontal = 24.dp),
         ) {
             Text(
                 text = stringResource(Res.string.create_account),
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(top = 8.dp),
             )
             Spacer(modifier = Modifier.height(4.dp))
             val annotatedLoginString =

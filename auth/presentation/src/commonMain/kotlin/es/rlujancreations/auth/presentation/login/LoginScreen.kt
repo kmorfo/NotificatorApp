@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -51,6 +53,8 @@ import notificatorapp.auth.presentation.generated.resources.cd_password
 import notificatorapp.auth.presentation.generated.resources.dont_have_an_account
 import notificatorapp.auth.presentation.generated.resources.email
 import notificatorapp.auth.presentation.generated.resources.example_email
+import notificatorapp.auth.presentation.generated.resources.hi_there
+import notificatorapp.auth.presentation.generated.resources.notificator_welcome_text
 import notificatorapp.auth.presentation.generated.resources.password
 import notificatorapp.auth.presentation.generated.resources.recovery_password
 import notificatorapp.auth.presentation.generated.resources.sign_up
@@ -106,17 +110,17 @@ fun LoginScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
                 ) {
-                    IconDisplay(LogoIcon(), modifier = Modifier.size(180.dp))
+                    IconDisplay(LogoIcon(), modifier = Modifier.size(140.dp))
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = "Notificator",
-                            fontSize = 40.sp,
+                            fontSize = 32.sp,
                             color = MaterialTheme.colorScheme.background,
                             fontWeight = FontWeight.SemiBold,
                         )
                         Text(
                             text = "APP",
-                            fontSize = 30.sp,
+                            fontSize = 26.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.background,
                             modifier = Modifier.rotateVertically(),
@@ -126,7 +130,6 @@ fun LoginScreen(
                 LoginForm(
                     state = state,
                     onAction = onAction,
-                    modifier = Modifier.weight(0.5f),
                 )
                 Spacer(modifier = Modifier.weight(0.04f))
             }
@@ -226,9 +229,10 @@ fun LoginScreen(
 private fun LoginForm(
     state: LoginState,
     onAction: (LoginAction) -> Unit,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
 ) {
     val focusManager = LocalFocusManager.current
+    val windowWidthSizeClass = getScreenDimensions().windowWidthSizeClass
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -236,6 +240,7 @@ private fun LoginForm(
         modifier =
             modifier
                 .padding(16.dp)
+                .verticalScroll(rememberScrollState())
                 .background(
                     MaterialTheme.colorScheme.background,
                     shape = Shapes.medium,
@@ -246,17 +251,32 @@ private fun LoginForm(
                     shape = Shapes.medium,
                 ),
     ) {
-        IconDisplay(
-            LogoRLujanIcon(),
-            contentDescription = stringResource(Res.string.cd_logo_rlc),
-            modifier =
-                Modifier
-                    .padding(top = 32.dp)
-                    .widthIn(min = 120.dp, max = 250.dp),
-        )
+        if (windowWidthSizeClass != WindowWidthSizeClass.Compact)
+            IconDisplay(
+                LogoRLujanIcon(),
+                contentDescription = stringResource(Res.string.cd_logo_rlc),
+                modifier =
+                    Modifier
+                        .padding(top = 32.dp)
+                        .widthIn(min = 120.dp, max = 250.dp),
+            )
+        else
+            Spacer(modifier = Modifier.height(24.dp))
         Column(
-            modifier = Modifier.padding(32.dp),
+            modifier = Modifier.padding(horizontal = 24.dp),
         ) {
+            Text(
+                text = stringResource(Res.string.hi_there),
+                fontWeight = FontWeight.SemiBold,
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+            Text(
+                text = stringResource(Res.string.notificator_welcome_text),
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(bottom = 8.dp),
+            )
             NotificatorTextField(
                 value = state.email,
                 onValueChange = { onAction(LoginAction.OnEmailChange(it)) },
@@ -341,11 +361,13 @@ private fun LoginForm(
                 Text(
                     text = annotatedRegisterString,
                     modifier =
-                        Modifier.clickable {
-                            onAction(LoginAction.OnRegisterClick)
-                        },
+                        Modifier
+                            .clickable {
+                                onAction(LoginAction.OnRegisterClick)
+                            },
                 )
             }
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }

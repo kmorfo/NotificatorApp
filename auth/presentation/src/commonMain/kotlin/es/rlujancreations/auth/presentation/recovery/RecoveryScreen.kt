@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -99,13 +101,13 @@ fun RecoveryScreen(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = "Notificator",
-                            fontSize = 40.sp,
+                            fontSize = 32.sp,
                             color = MaterialTheme.colorScheme.background,
                             fontWeight = FontWeight.SemiBold,
                         )
                         Text(
                             text = "APP",
-                            fontSize = 30.sp,
+                            fontSize = 26.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.background,
                             modifier = Modifier.rotateVertically(),
@@ -115,7 +117,6 @@ fun RecoveryScreen(
                 RecoveryForm(
                     state = state,
                     onAction = onAction,
-                    modifier = Modifier.weight(0.5f),
                 )
                 Spacer(modifier = Modifier.weight(0.04f))
             }
@@ -215,9 +216,10 @@ fun RecoveryScreen(
 private fun RecoveryForm(
     state: RecoveryState,
     onAction: (RecoveryAction) -> Unit,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
 ) {
     val focusManager = LocalFocusManager.current
+    val windowWidthSizeClass = getScreenDimensions().windowWidthSizeClass
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -225,6 +227,7 @@ private fun RecoveryForm(
         modifier =
             modifier
                 .padding(16.dp)
+                .verticalScroll(rememberScrollState())
                 .background(
                     MaterialTheme.colorScheme.background,
                     shape = Shapes.medium,
@@ -235,16 +238,19 @@ private fun RecoveryForm(
                     shape = Shapes.medium,
                 ),
     ) {
-        IconDisplay(
-            LogoRLujanIcon(),
-            contentDescription = stringResource(Res.string.cd_logo_rlc),
-            modifier =
-                Modifier
-                    .padding(top = 32.dp)
-                    .widthIn(min = 120.dp, max = 250.dp),
-        )
+        if (windowWidthSizeClass != WindowWidthSizeClass.Compact)
+            IconDisplay(
+                LogoRLujanIcon(),
+                contentDescription = stringResource(Res.string.cd_logo_rlc),
+                modifier =
+                    Modifier
+                        .padding(top = 32.dp)
+                        .widthIn(min = 120.dp, max = 250.dp),
+            )
+        else
+            Spacer(modifier = Modifier.height(24.dp))
         Column(
-            modifier = Modifier.padding(32.dp),
+            modifier = Modifier.padding(horizontal = 24.dp),
         ) {
             Text(
                 text = stringResource(Res.string.recovery_account),
@@ -312,6 +318,7 @@ private fun RecoveryForm(
                 enabled = state.emailError == null && state.email.isNotBlank() && !state.isSendingRecovery,
                 onClick = { onAction(RecoveryAction.OnRecoveryClick) },
             )
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
