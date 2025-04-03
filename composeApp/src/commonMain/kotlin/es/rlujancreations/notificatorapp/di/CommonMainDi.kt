@@ -1,5 +1,6 @@
 package es.rlujancreations.notificatorapp.di
 
+import es.rlujancreations.auth.data.di.authDataModule
 import es.rlujancreations.auth.domain.di.authDomainModule
 import es.rlujancreations.auth.presentation.di.authPresentationModule
 import es.rlujancreations.core.data.di.coreDataModule
@@ -35,6 +36,7 @@ fun initKoin(config: KoinAppDeclaration? = null) {
         modules(
             authPresentationModule,
             authDomainModule,
+            authDataModule,
             databaseNativeModule,
             coreDatabaseModule,
             coreDataModule,

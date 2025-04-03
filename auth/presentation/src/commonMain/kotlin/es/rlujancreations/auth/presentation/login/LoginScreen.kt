@@ -251,7 +251,7 @@ private fun LoginForm(
                     shape = Shapes.medium,
                 ),
     ) {
-        if (windowWidthSizeClass != WindowWidthSizeClass.Compact)
+        if (windowWidthSizeClass != WindowWidthSizeClass.Compact) {
             IconDisplay(
                 LogoRLujanIcon(),
                 contentDescription = stringResource(Res.string.cd_logo_rlc),
@@ -260,8 +260,9 @@ private fun LoginForm(
                         .padding(top = 32.dp)
                         .widthIn(min = 120.dp, max = 250.dp),
             )
-        else
+        } else {
             Spacer(modifier = Modifier.height(24.dp))
+        }
         Column(
             modifier = Modifier.padding(horizontal = 24.dp),
         ) {

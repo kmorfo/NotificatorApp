@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -37,7 +38,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import es.rlujancreations.core.presentation.EmailIcon
 import es.rlujancreations.core.presentation.IconDisplay
-import androidx.compose.foundation.rememberScrollState
 import es.rlujancreations.core.presentation.LogoIcon
 import es.rlujancreations.core.presentation.LogoRLujanIcon
 import es.rlujancreations.core.presentation.Shapes
@@ -277,7 +277,7 @@ private fun RegisterForm(
                     shape = Shapes.medium,
                 ),
     ) {
-        if (windowWidthSizeClass != WindowWidthSizeClass.Compact)
+        if (windowWidthSizeClass != WindowWidthSizeClass.Compact) {
             IconDisplay(
                 LogoRLujanIcon(),
                 contentDescription = stringResource(Res.string.cd_logo_rlc),
@@ -286,8 +286,9 @@ private fun RegisterForm(
                         .padding(top = 32.dp)
                         .widthIn(min = 120.dp, max = 250.dp),
             )
-        else
+        } else {
             Spacer(modifier = Modifier.height(24.dp))
+        }
         Column(
             modifier = Modifier.padding(horizontal = 24.dp),
         ) {

@@ -6,10 +6,8 @@ import org.jetbrains.compose.resources.StringResource
 data class RegisterState(
     val email: String = "",
     val emailError: StringResource? = null,
-
     val username: String = "",
     val usernameError: StringResource? = null,
-
     val password: String = "",
     val isPasswordVisible: Boolean = false,
     val passwordValidationState: PasswordValidationState = PasswordValidationState(),
