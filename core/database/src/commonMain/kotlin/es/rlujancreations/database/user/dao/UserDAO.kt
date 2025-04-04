@@ -11,10 +11,10 @@ import es.rlujancreations.database.user.entity.UserEntity
 @Dao
 interface UserDAO {
     @Query("SELECT * FROM users WHERE id = :id")
-    suspend fun getUserById(id: Int): UserEntity?
+    suspend fun getUserById(id: String): UserEntity?
 
     @Query("SELECT * FROM users WHERE id = :id AND isSynchronized = 0")
-    suspend fun getPendingSyncUser(id: Int): UserEntity?
+    suspend fun getPendingSyncUser(id: String): UserEntity?
 
     @Upsert
     suspend fun upsertUser(user: UserEntity)

@@ -3,7 +3,11 @@ package es.rlujancreations.auth.presentation.register
 import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import es.rlujancreations.auth.domain.usecases.RegisterUseCase
 import es.rlujancreations.auth.domain.validator.UserDataValidator
+import es.rlujancreations.core.domain.util.onError
+import es.rlujancreations.core.domain.util.onSuccess
+import es.rlujancreations.core.presentation.asUiText
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -11,11 +15,13 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import notificatorapp.auth.presentation.generated.resources.Res
 import notificatorapp.auth.presentation.generated.resources.invalid_email
 import notificatorapp.auth.presentation.generated.resources.username_error
 
 class RegisterViewModel(
+    private val registerUseCase: RegisterUseCase,
     private val userDataValidator: UserDataValidator,
 ) : ViewModel() {
     private var hasLoadedInitialData = false
@@ -135,5 +141,18 @@ class RegisterViewModel(
     }
 
     private fun register() {
+        _state.update { it.copy(isRegistering = true) }
+        viewModelScope.launch {
+            registerUseCase(
+                username = state.value.username,
+                email = state.value.email,
+                password = state.value.password,
+            ).onSuccess {
+                eventChannel.send(RegisterEvent.RegistrationSuccess)
+            }.onError { error ->
+                eventChannel.send(RegisterEvent.Error(error.asUiText()))
+            }
+            _state.update { it.copy(isRegistering = false) }
+        }
     }
 }

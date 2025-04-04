@@ -16,7 +16,7 @@ fun UserEntity.toDomain() =
 
 fun UserModel.toUserEntity(isSynchronized: Boolean = true): UserEntity {
     return UserEntity(
-        id = id ?: 0,
+        id = id ?: "",
         username = username,
         email = email,
         updatedAt = Clock.System.now().epochSeconds,

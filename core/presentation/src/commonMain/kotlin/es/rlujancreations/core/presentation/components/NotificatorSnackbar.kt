@@ -35,7 +35,7 @@ fun MySnackbar(
         containerColor = containerColor,
         contentColor = Color.White,
         shape = RoundedCornerShape(3.dp),
-        modifier = modifier.padding(2.dp),
+        modifier = modifier.padding(horizontal = 2.dp, vertical = 32.dp),
     ) {
         Text(
             text = message,

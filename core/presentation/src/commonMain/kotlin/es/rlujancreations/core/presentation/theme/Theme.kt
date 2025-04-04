@@ -105,7 +105,7 @@ data class ColorFamily(
 @Composable
 fun NotificatorAppTheme(
     content:
-        @Composable()
+    @Composable()
         () -> Unit,
 ) {
     val getUserPreferencesUseCase = koinInject<GetUserPreferencesUseCase>()
@@ -113,7 +113,7 @@ fun NotificatorAppTheme(
     val userSettings by remember {
         mutableStateOf(
             UserPreferencesModel(
-                userId = -1,
+                userId = "0000",
                 darkMode = DarkModeSettings.SYSTEM_DEFAULT,
             ),
         )

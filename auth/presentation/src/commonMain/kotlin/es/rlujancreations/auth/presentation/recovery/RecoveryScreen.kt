@@ -15,9 +15,14 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -32,13 +37,17 @@ import es.rlujancreations.core.presentation.EmailIcon
 import es.rlujancreations.core.presentation.IconDisplay
 import es.rlujancreations.core.presentation.LogoIcon
 import es.rlujancreations.core.presentation.LogoRLujanIcon
+import es.rlujancreations.core.presentation.ObserveAsEvents
 import es.rlujancreations.core.presentation.Shapes
+import es.rlujancreations.core.presentation.StringProvider
 import es.rlujancreations.core.presentation.WindowWidthSizeClass
+import es.rlujancreations.core.presentation.components.MySnackbar
 import es.rlujancreations.core.presentation.components.NotificatorActionButton
 import es.rlujancreations.core.presentation.components.NotificatorTextField
 import es.rlujancreations.core.presentation.extensions.rotateVertically
 import es.rlujancreations.core.presentation.getScreenDimensions
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import notificatorapp.auth.presentation.generated.resources.Res
 import notificatorapp.auth.presentation.generated.resources.already_have_an_account
 import notificatorapp.auth.presentation.generated.resources.btn_login
@@ -50,12 +59,12 @@ import notificatorapp.auth.presentation.generated.resources.example_email
 import notificatorapp.auth.presentation.generated.resources.recovery_account
 import notificatorapp.auth.presentation.generated.resources.recovery_explanation
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun RecoveryScreenRoot(
     onLoginClick: () -> Unit,
-    modifier: Modifier = Modifier,
     viewModel: RecoveryViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -70,6 +79,7 @@ fun RecoveryScreenRoot(
             viewModel.onAction(action)
         },
         events = viewModel.events,
+        snackbarHostState = viewModel.snackbarHostState,
     )
 }
 
@@ -77,136 +87,172 @@ fun RecoveryScreenRoot(
 fun RecoveryScreen(
     state: RecoveryState,
     onAction: (RecoveryAction) -> Unit,
-    modifier: Modifier = Modifier,
     events: Flow<RecoveryEvent>,
+    snackbarHostState: SnackbarHostState = SnackbarHostState(),
 ) {
     val windowWidthSizeClass = getScreenDimensions().windowWidthSizeClass
+    val scope = rememberCoroutineScope()
+    val stringProvider: StringProvider = koinInject()
 
-    when (windowWidthSizeClass) {
-        WindowWidthSizeClass.Compact -> {
-            Column(
-                modifier =
-                    modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f)),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-            ) {
-                Column(
-                    modifier = Modifier.weight(0.25f),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                ) {
-                    IconDisplay(LogoIcon(), modifier = Modifier.size(180.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "Notificator",
-                            fontSize = 32.sp,
-                            color = MaterialTheme.colorScheme.background,
-                            fontWeight = FontWeight.SemiBold,
-                        )
-                        Text(
-                            text = "APP",
-                            fontSize = 26.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.background,
-                            modifier = Modifier.rotateVertically(),
-                        )
-                    }
+    ObserveAsEvents(events) { event ->
+        when (event) {
+            is RecoveryEvent.Error -> {
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = event.error.asString(stringProvider),
+                        duration = SnackbarDuration.Short,
+                    )
                 }
-                RecoveryForm(
-                    state = state,
-                    onAction = onAction,
-                )
-                Spacer(modifier = Modifier.weight(0.04f))
+            }
+
+            RecoveryEvent.RecoverySentSuccess -> {
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Recovery OK",
+                        duration = SnackbarDuration.Short,
+                    )
+                }
             }
         }
+    }
 
-        WindowWidthSizeClass.Medium -> {
-            Column(
-                modifier =
-                    modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background)
-                        .padding(top = 16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-            ) {
-                Column(
-                    modifier = Modifier.weight(0.25f),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                ) {
-                    IconDisplay(LogoIcon(), modifier = Modifier.size(150.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "Notificator",
-                            fontSize = 38.sp,
-                            fontWeight = FontWeight.SemiBold,
-                        )
-                        Text(
-                            text = "APP",
-                            fontSize = 40.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.rotateVertically(),
-                        )
-                    }
-                }
-                RecoveryForm(
-                    state = state,
-                    onAction = onAction,
-                    modifier = Modifier.weight(0.5f),
-                )
-                Spacer(modifier = Modifier.weight(0.06f))
+
+    Scaffold(
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState) { snackbarData ->
+                MySnackbar(snackbarData)
             }
-        }
-
-        WindowWidthSizeClass.Expanded -> {
-            Row(
-                modifier =
-                    modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.onBackground),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
+        },
+    ) { paddingValues ->
+        when (windowWidthSizeClass) {
+            WindowWidthSizeClass.Compact -> {
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
                     modifier =
                         Modifier
                             .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.background)
-                            .weight(0.5f),
+                            .padding(paddingValues)
+                            .background(MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f)),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
                 ) {
-                    Row(verticalAlignment = Alignment.Bottom) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.SpaceAround,
-                        ) {
-                            IconDisplay(LogoIcon(), modifier = Modifier.size(250.dp))
+                    Column(
+                        modifier = Modifier.weight(0.25f),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center,
+                    ) {
+                        IconDisplay(LogoIcon(), modifier = Modifier.size(180.dp))
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
                                 text = "Notificator",
-                                fontSize = 65.sp,
-                                color = MaterialTheme.colorScheme.onBackground,
+                                fontSize = 32.sp,
+                                color = MaterialTheme.colorScheme.background,
                                 fontWeight = FontWeight.SemiBold,
                             )
+                            Text(
+                                text = "APP",
+                                fontSize = 26.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.background,
+                                modifier = Modifier.rotateVertically(),
+                            )
                         }
-
-                        Text(
-                            text = "APP",
-                            fontSize = 38.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier.rotateVertically(),
-                        )
                     }
+                    RecoveryForm(
+                        state = state,
+                        onAction = onAction,
+                    )
+                    Spacer(modifier = Modifier.weight(0.04f))
                 }
-                RecoveryForm(
-                    state = state,
-                    onAction = onAction,
-                    modifier = Modifier.weight(0.5f),
-                )
+            }
+
+            WindowWidthSizeClass.Medium -> {
+                Column(
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues)
+                            .background(MaterialTheme.colorScheme.background)
+                            .padding(top = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    Column(
+                        modifier = Modifier.weight(0.25f),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center,
+                    ) {
+                        IconDisplay(LogoIcon(), modifier = Modifier.size(150.dp))
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = "Notificator",
+                                fontSize = 38.sp,
+                                fontWeight = FontWeight.SemiBold,
+                            )
+                            Text(
+                                text = "APP",
+                                fontSize = 40.sp,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.rotateVertically(),
+                            )
+                        }
+                    }
+                    RecoveryForm(
+                        state = state,
+                        onAction = onAction,
+                        modifier = Modifier.weight(0.5f),
+                    )
+                    Spacer(modifier = Modifier.weight(0.06f))
+                }
+            }
+
+            WindowWidthSizeClass.Expanded -> {
+                Row(
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues)
+                            .background(MaterialTheme.colorScheme.onBackground),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center,
+                        modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .background(MaterialTheme.colorScheme.background)
+                                .weight(0.5f),
+                    ) {
+                        Row(verticalAlignment = Alignment.Bottom) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.SpaceAround,
+                            ) {
+                                IconDisplay(LogoIcon(), modifier = Modifier.size(250.dp))
+                                Text(
+                                    text = "Notificator",
+                                    fontSize = 65.sp,
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontWeight = FontWeight.SemiBold,
+                                )
+                            }
+
+                            Text(
+                                text = "APP",
+                                fontSize = 38.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onBackground,
+                                modifier = Modifier.rotateVertically(),
+                            )
+                        }
+                    }
+                    RecoveryForm(
+                        state = state,
+                        onAction = onAction,
+                        modifier = Modifier.weight(0.5f),
+                    )
+                }
             }
         }
     }

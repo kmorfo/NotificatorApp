@@ -19,11 +19,13 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -40,7 +42,9 @@ import es.rlujancreations.core.presentation.EmailIcon
 import es.rlujancreations.core.presentation.IconDisplay
 import es.rlujancreations.core.presentation.LogoIcon
 import es.rlujancreations.core.presentation.LogoRLujanIcon
+import es.rlujancreations.core.presentation.ObserveAsEvents
 import es.rlujancreations.core.presentation.Shapes
+import es.rlujancreations.core.presentation.StringProvider
 import es.rlujancreations.core.presentation.UserIcon
 import es.rlujancreations.core.presentation.WindowWidthSizeClass
 import es.rlujancreations.core.presentation.components.MySnackbar
@@ -51,6 +55,7 @@ import es.rlujancreations.core.presentation.components.RegisterRequirements
 import es.rlujancreations.core.presentation.extensions.rotateVertically
 import es.rlujancreations.core.presentation.getScreenDimensions
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import notificatorapp.auth.presentation.generated.resources.Res
 import notificatorapp.auth.presentation.generated.resources.already_have_an_account
 import notificatorapp.auth.presentation.generated.resources.at_least_one_number
@@ -73,20 +78,19 @@ import notificatorapp.auth.presentation.generated.resources.password
 import notificatorapp.auth.presentation.generated.resources.password_confirmation
 import notificatorapp.auth.presentation.generated.resources.username
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun RegisterScreenRoot(
     onLoginClick: () -> Unit,
     onSuccessfulRegistration: () -> Unit,
-    modifier: Modifier = Modifier,
     viewModel: RegisterViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     RegisterScreen(
         state = state,
-        modifier = modifier,
         snackbarHostState = viewModel.snackbarHostState,
         onAction = { action ->
             when (action) {
@@ -103,16 +107,40 @@ fun RegisterScreenRoot(
 @Composable
 fun RegisterScreen(
     state: RegisterState,
-    modifier: Modifier = Modifier,
     snackbarHostState: SnackbarHostState = SnackbarHostState(),
     events: Flow<RegisterEvent>,
     onAction: (RegisterAction) -> Unit,
     onSuccessfulRegistration: () -> Unit,
 ) {
     val windowWidthSizeClass = getScreenDimensions().windowWidthSizeClass
+    val scope = rememberCoroutineScope()
+    val stringProvider: StringProvider = koinInject()
+
+    ObserveAsEvents(events) { event ->
+        when (event) {
+            is RegisterEvent.Error -> {
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = event.error.asString(stringProvider),
+                        duration = SnackbarDuration.Short,
+                    )
+                }
+            }
+
+            RegisterEvent.RegistrationSuccess -> {
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Registration OK",
+                        duration = SnackbarDuration.Short,
+                    )
+//                onSuccessfulRegistration()
+                }
+            }
+        }
+    }
 
     Scaffold(
-        modifier = modifier,
+        modifier = Modifier,
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState) { snackbarData ->
                 MySnackbar(snackbarData)
@@ -161,7 +189,7 @@ fun RegisterScreen(
             WindowWidthSizeClass.Medium -> {
                 Column(
                     modifier =
-                        modifier
+                        Modifier
                             .fillMaxSize()
                             .padding(paddingValues)
                             .background(MaterialTheme.colorScheme.background)
@@ -201,7 +229,7 @@ fun RegisterScreen(
             WindowWidthSizeClass.Expanded -> {
                 Row(
                     modifier =
-                        modifier
+                        Modifier
                             .fillMaxSize()
                             .padding(paddingValues)
                             .background(MaterialTheme.colorScheme.onBackground),

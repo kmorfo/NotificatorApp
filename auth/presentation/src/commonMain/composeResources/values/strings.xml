@@ -44,5 +44,7 @@
 
     <string name="recovery_password">Forgot your password?</string>
 
+    <string name="error_email_password_incorrect">The email or password is incorrect.</string>
+
 
 </resources>
