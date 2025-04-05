@@ -127,7 +127,7 @@ fun LoginScreen(
                         duration = SnackbarDuration.Short,
                     )
                 }
-//                onLoginSuccess()
+                onLoginSuccess()
             }
         }
     }

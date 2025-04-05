@@ -54,7 +54,7 @@ class AuthRepositoryKtor(
                 sessionStorage.set(
                     AuthInfo(
                         accessToken = userDTO.token ?: "",
-                        userId = userDTO.id.toString(),
+                        userId = userDTO.id,
                     ),
                 )
                 userDataSourceLocal.upsertUser(userDTO.toDomain())

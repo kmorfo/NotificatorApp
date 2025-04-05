@@ -1,6 +1,8 @@
 package es.rlujancreations.notificatorapp
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -34,7 +36,10 @@ fun App() {
             val navController = rememberNavController()
 
             if (viewModel.state.isLoading) {
-                AnimatedVisibility(viewModel.state.isLoading) {
+                AnimatedVisibility(
+                    visible = viewModel.state.isLoading,
+                    enter = scaleIn(),
+                ) {
                     Box(
                         modifier =
                             Modifier
@@ -44,7 +49,7 @@ fun App() {
                     ) {
                         Image(
                             painter = painterResource(Res.drawable.logo),
-                            contentDescription = "Logo",
+                            contentDescription = "App Logo",
                             modifier =
                                 Modifier
                                     .aspectRatio(1f)
@@ -52,8 +57,8 @@ fun App() {
                                     .shadow(
                                         elevation = 25.dp,
                                         shape = CircleShape,
-                                        spotColor = Color(0xff9ABCC7),
-                                        ambientColor = Color(0xff9ABCC7),
+                                        spotColor = Color(0xff4285f4),
+                                        ambientColor = Color(0xff4285f4),
                                     )
                                     .clip(CircleShape),
                         )

@@ -6,4 +6,6 @@
     <string name="channels_title">Channels</string>
     <string name="messages_title">Messages</string>
     <string name="tasks_title">Tasks</string>
+
+    <string name="invalid_token">Token expired, please login again</string>
 </resources>

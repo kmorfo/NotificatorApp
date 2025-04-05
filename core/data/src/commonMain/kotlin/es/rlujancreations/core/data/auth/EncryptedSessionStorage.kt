@@ -28,7 +28,7 @@ class EncryptedSessionStorage(
         }
     }
 
-    override suspend fun set(authInfo: AuthInfo) {
+    override suspend fun set(authInfo: AuthInfo?) {
         return withContext(Dispatchers.IO) {
             if (authInfo == null) {
                 kSecureStorage.removeItem(AUTH_INFO_KEY)

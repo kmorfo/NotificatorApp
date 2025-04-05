@@ -133,7 +133,7 @@ fun RegisterScreen(
                         message = "Registration OK",
                         duration = SnackbarDuration.Short,
                     )
-//                onSuccessfulRegistration()
+                    onSuccessfulRegistration()
                 }
             }
         }
