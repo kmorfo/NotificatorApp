@@ -7,4 +7,6 @@ sealed interface HomeAction {
     data object OnSettingsClick : HomeAction
 
     data object OnTokenExpired : HomeAction
+
+    data class OnItemClicked(val index: Int) : HomeAction
 }

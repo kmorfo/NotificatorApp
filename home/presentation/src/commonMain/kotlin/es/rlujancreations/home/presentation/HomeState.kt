@@ -9,4 +9,5 @@ data class HomeState(
     val isLoading: Boolean = false,
     val userId: String = "-1",
     val user: UserModel? = null,
+    val selectedIndex: Int = 0,
 )

@@ -67,7 +67,7 @@ class AuthRepositoryKtor(
     override suspend fun recovery(email: String): EmptyResult<DataError> {
         val result =
             httpClient.get<Unit>(
-                route = "/auth/forgot-password/${email}",
+                route = "/auth/forgot-password/$email",
             )
 
         return result.asEmptyDataResult()

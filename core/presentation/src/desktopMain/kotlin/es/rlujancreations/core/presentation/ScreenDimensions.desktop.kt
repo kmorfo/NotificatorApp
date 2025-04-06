@@ -13,8 +13,8 @@ actual fun getScreenDimensions(): ScreenDimensions =
 
         override val windowWidthSizeClass: WindowWidthSizeClass =
             when {
-                screenWidthDp < 600 -> WindowWidthSizeClass.Compact
-                screenWidthDp < 840 -> WindowWidthSizeClass.Medium
-                else -> WindowWidthSizeClass.Expanded
+                screenWidthDp >= 840 -> WindowWidthSizeClass.Expanded
+                screenWidthDp >= 600 -> WindowWidthSizeClass.Medium
+                else -> WindowWidthSizeClass.Compact
             }
     }

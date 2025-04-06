@@ -22,10 +22,11 @@ class MainViewModel(
     init {
         state = state.copy(isLoading = true)
         viewModelScope.launch {
-            state = state.copy(
-                hasSeenOnboarding = hasSeenOnboardingUseCase(),
-                isLoggedIn = getLoggedUserIdUseCase() != null,
-            )
+            state =
+                state.copy(
+                    hasSeenOnboarding = hasSeenOnboardingUseCase(),
+                    isLoggedIn = getLoggedUserIdUseCase() != null,
+                )
             state = state.copy(isLoading = false)
         }
     }

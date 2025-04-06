@@ -1,20 +1,37 @@
 package es.rlujancreations.home.presentation
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import es.rlujancreations.core.presentation.AppsIcon
+import es.rlujancreations.core.presentation.ChannelIcon
+import es.rlujancreations.core.presentation.DevicesIcon
+import es.rlujancreations.core.presentation.IconDisplay
 import es.rlujancreations.core.presentation.ObserveAsEvents
+import es.rlujancreations.core.presentation.ProjectIcon
+import es.rlujancreations.core.presentation.SendIcon
 import es.rlujancreations.core.presentation.StringProvider
-import es.rlujancreations.core.presentation.components.MySnackbar
+import es.rlujancreations.core.presentation.TaskIcon
+import es.rlujancreations.home.presentation.navigation.AdaptiveNavigationScaffold
+import es.rlujancreations.home.presentation.navigation.NavigationItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import notificatorapp.home.presentation.generated.resources.Res
+import notificatorapp.home.presentation.generated.resources.apps_title
+import notificatorapp.home.presentation.generated.resources.channels_title
+import notificatorapp.home.presentation.generated.resources.devices_title
+import notificatorapp.home.presentation.generated.resources.messages_title
+import notificatorapp.home.presentation.generated.resources.projects_title
+import notificatorapp.home.presentation.generated.resources.tasks_title
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -34,6 +51,7 @@ fun HomeScreenRoot(
             when (action) {
                 is HomeAction.OnSettingsClick -> onSettingsClick()
                 is HomeAction.OnTokenExpired -> onTokenExpired()
+                else -> Unit
             }
             viewModel.onAction(action)
         },
@@ -53,6 +71,33 @@ fun HomeScreen(
 ) {
     val scope = rememberCoroutineScope()
     val stringProvider: StringProvider = koinInject()
+
+    val navigationItems =
+        listOf(
+            Res.string.projects_title,
+            Res.string.apps_title,
+            Res.string.devices_title,
+            Res.string.channels_title,
+            Res.string.messages_title,
+            Res.string.tasks_title,
+        ).mapIndexed { index, label ->
+            NavigationItem(
+                selected = index == state.selectedIndex,
+                onClick = { onAction(HomeAction.OnItemClicked(index)) },
+                label = { Text(stringResource(label)) },
+                icon = {
+                    when (index) {
+                        0 -> ProjectIcon()
+                        1 -> AppsIcon()
+                        2 -> DevicesIcon()
+                        3 -> ChannelIcon()
+                        4 -> SendIcon()
+                        5 -> TaskIcon()
+                        else -> ProjectIcon()
+                    }
+                },
+            )
+        }
 
     ObserveAsEvents(events) { event ->
         when (event) {
@@ -85,39 +130,13 @@ fun HomeScreen(
             }
         }
     }
-    //            NavigationWrapperUI {
-//                ScaffoldAppContent()
-//            }
-    Scaffold(
-        snackbarHost = {
-            SnackbarHost(hostState = snackbarHostState) { snackbarData ->
-                MySnackbar(snackbarData)
+    AdaptiveNavigationScaffold(
+        navigationItems = navigationItems,
+        content = { paddingValues ->
+            Column(modifier = Modifier.padding(paddingValues).fillMaxSize()) {
+                Text("${state.selectedIndex}", modifier = Modifier.background(Color.Red))
+                IconDisplay(navigationItems[state.selectedIndex].icon())
             }
         },
-    ) { paddingValues ->
-        Box(modifier = Modifier.padding(paddingValues)) {
-            Text("Hola desde scaffold")
-        }
-    }
+    )
 }
-
-// @OptIn(ExperimentalMaterial3AdaptiveApi::class)
-// @Composable
-// fun ScaffoldAppContent() {
-//    val navigator = rememberListDetailPaneScaffoldNavigator<Long>()
-//
-//    ListDetailPaneScaffold(
-//        directive = navigator.scaffoldDirective,
-//        value = navigator.scaffoldValue,
-//        listPane = {
-//            AnimatedPane {
-//                Box(modifier = Modifier.fillMaxWidth().background(Color.Magenta)) {}
-//            }
-//        },
-//        detailPane = {
-//            AnimatedPane {
-//                Box(modifier = Modifier.fillMaxWidth().background(Color.Green)) {}
-//            }
-//        },
-//    )
-// }

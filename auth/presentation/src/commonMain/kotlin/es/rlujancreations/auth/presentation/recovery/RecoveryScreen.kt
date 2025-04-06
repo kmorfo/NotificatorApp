@@ -116,7 +116,6 @@ fun RecoveryScreen(
         }
     }
 
-
     Scaffold(
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState) { snackbarData ->

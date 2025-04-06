@@ -76,7 +76,7 @@ fun DataError.asUiText(): UiText {
             UiText.StringResource(
                 Res.string.unprocessable_entity,
             )
-        DataError.Network.UNAUTHORIZED->
+        DataError.Network.UNAUTHORIZED ->
             UiText.StringResource(
                 Res.string.error_email_password_incorrect,
             )

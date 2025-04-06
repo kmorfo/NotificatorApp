@@ -58,7 +58,17 @@ class HomeViewModel(
 
     fun onAction(action: HomeAction) {
         when (action) {
-            else -> {}
+            is HomeAction.OnItemClicked -> {
+                state = state.copy(selectedIndex = action.index)
+            }
+
+            HomeAction.OnSettingsClick -> {
+            }
+
+            HomeAction.OnTokenExpired -> {
+            }
+
+            else -> Unit
         }
     }
 

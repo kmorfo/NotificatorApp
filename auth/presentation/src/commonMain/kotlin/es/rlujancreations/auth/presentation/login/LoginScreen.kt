@@ -38,7 +38,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import es.rlujancreations.auth.presentation.register.RegisterEvent
 import es.rlujancreations.core.presentation.EmailIcon
 import es.rlujancreations.core.presentation.IconDisplay
 import es.rlujancreations.core.presentation.LogoIcon

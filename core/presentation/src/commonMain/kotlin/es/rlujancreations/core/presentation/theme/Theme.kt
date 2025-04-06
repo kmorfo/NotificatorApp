@@ -105,7 +105,7 @@ data class ColorFamily(
 @Composable
 fun NotificatorAppTheme(
     content:
-    @Composable()
+        @Composable()
         () -> Unit,
 ) {
     val getUserPreferencesUseCase = koinInject<GetUserPreferencesUseCase>()

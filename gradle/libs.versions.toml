@@ -36,8 +36,8 @@ serialization = "1.7.3"
 ktlint = "12.1.1"
 napier = "2.6.1"
 
-material3Adaptive = "1.1.0-alpha04"
-material3AdaptiveNavSuite = "1.8.0-alpha04"
+material3Adaptive = "1.1.0-beta01"
+material3AdaptiveNavSuite = "1.8.0-beta01"
 
 # EncriptedSharedPreferences
 securityCrypto = "1.1.0-alpha06"
@@ -88,7 +88,7 @@ compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose-mu
 compose-components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "compose-multiplatform" }
 
 #compose-material3-adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "material3Adaptive" }
-compose-material3-adaptive-layout = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout", version.ref = "material3Adaptive" }
+#compose-material3-adaptive-layout = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout", version.ref = "material3Adaptive" }
 #compose-material3-adaptive-navigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation", version.ref = "material3Adaptive" }
 #compose-material3-adaptive-nav-suite = { module = "org.jetbrains.compose.material3:material3-adaptive-navigation-suite", version.ref = "material3AdaptiveNavSuite" }
 
