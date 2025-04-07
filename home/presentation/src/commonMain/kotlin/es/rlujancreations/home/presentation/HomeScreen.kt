@@ -134,7 +134,7 @@ fun HomeScreen(
         navigationItems = navigationItems,
         content = { paddingValues ->
             Column(modifier = Modifier.padding(paddingValues).fillMaxSize()) {
-                Text("${state.selectedIndex}", modifier = Modifier.background(Color.Red))
+                navigationItems[state.selectedIndex].label()
                 IconDisplay(navigationItems[state.selectedIndex].icon())
             }
         },
