@@ -191,20 +191,20 @@ fun LoginScreen(
                     verticalArrangement = Arrangement.Center,
                 ) {
                     Column(
-                        modifier = Modifier.weight(0.25f),
+                        modifier = Modifier.weight(0.20f),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center,
                     ) {
-                        IconDisplay(LogoIcon(), modifier = Modifier.size(150.dp))
+                        IconDisplay(LogoIcon(), modifier = Modifier.size(110.dp))
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
                                 text = "Notificator",
-                                fontSize = 38.sp,
+                                fontSize = 34.sp,
                                 fontWeight = FontWeight.SemiBold,
                             )
                             Text(
                                 text = "APP",
-                                fontSize = 40.sp,
+                                fontSize = 24.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.rotateVertically(),
                             )
@@ -213,9 +213,9 @@ fun LoginScreen(
                     LoginForm(
                         state = state,
                         onAction = onAction,
-                        modifier = Modifier.weight(0.5f),
+                        modifier = Modifier.weight(0.6f),
                     )
-                    Spacer(modifier = Modifier.weight(0.06f))
+                    Spacer(modifier = Modifier.weight(0.02f))
                 }
             }
 

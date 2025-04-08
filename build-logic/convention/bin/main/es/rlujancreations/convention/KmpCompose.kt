@@ -49,7 +49,10 @@ private fun composeDepencencies(project: Project) {
             implementation(libs.findBundle("compose").get())
 
             implementation(libs.findLibrary("kotlinx.serialization.json").get())
-            implementation(libs.findLibrary("androidx.navigation.compose").get())
+
+            //Adaptive components
+//            implementation(libs.findLibrary("compose.material3.adaptive").get())
+//            implementation(libs.findLibrary("compose.material3.adaptive.layout").get())
 
             implementation(project.dependencies.platform(libs.findLibrary("koin.bom").get()))
             implementation(libs.findLibrary("koin.core").get())

@@ -9,21 +9,60 @@
 
 # Kotlin Multiplatform Mobile Template Project
 
+> ⚠️ **Este proyecto está en desarrollo activo.**  
+> Algunas funciones pueden cambiar o no estar completamente implementadas todavía.
+
+
 ## Descripción
 
-Este repositorio es una plantilla para el desarrollo de aplicaciones multiplataforma utilizando
-Kotlin Multiplatform (KMP). Ha sido diseñado para acelerar el inicio de nuevos proyectos,
-proporcionando una configuración inicial robusta y modular que incluye librerías y herramientas
-esenciales ya preconfiguradas.
+NotificatorApp es una aplicación multiplataforma desarrollada con Kotlin Multiplatform Platform (
+KMP)
+que ofrece una interfaz intuitiva y moderna para gestionar el envío de notificaciones a través de
+Google Cloud Messaging. Gracias a su arquitectura, la aplicación está disponible para Android, iOS y
+Desktop, lo que permite un amplio rango de dispositivos y escenarios de uso.
+
+Este proyecto se ha desarrollado a partir de la
+plantilla [KMMTemplateMM](https://github.com/kmorfo/KMMTemplateMM), ampliando su
+compatibilidad
+para abarcar diferentes plataformas sin renunciar a la consistencia en la experiencia de usuario. La
+aplicación actúa como frontend para el servicio de backend provisto por
+la [app Notificator](https://github.com/kmorfo/Notificator), la cual
+se encuentra disponible como software de código abierto en GitHub y como imagen de Docker en
+kmorfo/notificator_app
+
+## 🖼 Imágenes del proyecto.
+
+<h4 align="center">🧭 Onboarding screen</h4>
+
+| **Expanded** | **Medium** | **Compact** |
+|:------------:|:----------:|:-----------:|
+| <img src="githubimages/onboarding-expanded.png" width="450px"/> | <img src="githubimages/onboarding-medium.png" width="320px"/> | <img src="githubimages/onboarding-compact.png" width="200px" height="320px"/> |
+
+<h4 align="center">🗝️ Login screen</h4>
+
+| **Expanded** | **Medium** | **Compact** |
+|:------------:|:----------:|:-----------:|
+| <img src="githubimages/login-expanded.png" width="450px"/> | <img src="githubimages/login-medium.png" width="320px"/> | <img src="githubimages/login-compact.png" width="200px" height="320px"/> |
+
+
+---
 
 ### Características principales
 
-- **Multiplataforma:** Diseñado para Android e iOS.
+- **Multiplataforma:** Diseñado para Android, iOS y Desktop, aprovechando las ventajas de Kotlin
+  Multiplatform para compartir lógica de negocio entre plataformas, reduciendo el esfuerzo de
+  mantenimiento y acelerando el tiempo de desarrollo.
 - **Estructura modularizada:** Los módulos están organizados en capas para una mejor separación de
   responsabilidades y escalabilidad.
 - **Plugins de convenciones (Convention Plugins):** Utiliza un enfoque declarativo y centralizado
   para la configuración de Gradle.
-- **Librerías preconfiguradas:**
+- **Modo Offline-first:** La aplicación está diseñada para funcionar sin conexión a internet,
+  sincronizando los datos cuando la conexión esté disponible.
+- **Modo oscuro/claro:** Soporte para temas claro y oscuro, adaptándose a las preferencias del
+  usuario y mejorando la experiencia visual.
+- **Backend Open Source:** Se apoya en la aplicación Notificator, lo que garantiza flexibilidad y
+  transparencia al estar completamente abierta a la comunidad.
+- **Librerías utilizadas:**
     - `ktlint` para el formateo del código.
     - `Room` para la gestión de bases de datos.
     - `Ktor` para el manejo de peticiones HTTP.
@@ -43,6 +82,10 @@ esenciales ya preconfiguradas.
     - `presentation`: Lógica de presentación compartida.
 3. **build-logic**: Plugins de convenciones para centralizar la configuración de Gradle.
 4. **commonTest**: Módulo común para la escritura de pruebas unitarias compartidas.
+5. **gradle**: Archivo de configuración de Gradle.
+6. **onboarding**: Modulo de Onboarding de la aplicación.
+7. **auth**: Modulo de autenticación de la aplicación.
+8. **home**: Modulo principal de la aplicación.
 
 ## Beneficios de los Convention Plugins
 
@@ -73,24 +116,41 @@ proyecto está organizado en módulos que ofrecen los siguientes beneficios:
 - Kotlin Multiplatform configurado en tu entorno de desarrollo.
 - Android Studio (preferiblemente la última versión estable).
 - Xcode para desarrollo en iOS.
+- Tener el backend Notificator en funcionamiento. Puedes clonar el
+  repositorio [Notificator](https://github.com/kmorfo/Notificator) ejecutarlo como un contenedor
+  Docker.
 
 ## Configuración
 
-1. Clona este repositorio:
+1. Clona el repositorio de la app Notificator o ejecútalo como un contenedor Docker:
+   ```
+   git clone https://github.com/kmorfo/Notificator
+   ```
+2. Clona este repositorio:
    ```
    git clone https://github.com/kmorfo/notificatorapp
    ```
-2. Sincroniza el proyecto con Gradle para descargar las dependencias.
-3. Configura las plataformas objetivo (Android e iOS) según tus necesidades.
+3. Sincroniza el proyecto con Gradle para descargar las dependencias.
 
 ## Estructura del Proyecto
 
 ```
 project-root/
 ├── composeApp/       # Punto de entrada de la aplicación
-├── core/
+├── core/            # Capa de core de la aplicación con funciónes y librerias comunes
 │   ├── data/        # Repositorios y acceso a datos
 │   ├── database/    # Configuración de Room
+│   ├── domain/      # Casos de uso y lógica de negocio
+│   └── presentation/ # Lógica de presentación
+├── onboarding/      # Onboarding de la aplicación (primera vez)
+│   ├── domain/      # Casos de uso y lógica de negocio
+│   └── presentation/ # Lógica de presentación
+├── auth/            # Pantallas de autenticación, registro y reestablecimiento de contraseña
+│   ├── data/        # Repositorios y acceso a datos
+│   ├── domain/      # Casos de uso y lógica de negocio
+│   └── presentation/ # Lógica de presentación
+├── home/            # Pantalla principal de la aplicación
+│   ├── data/        # Repositorios y acceso a datos
 │   ├── domain/      # Casos de uso y lógica de negocio
 │   └── presentation/ # Lógica de presentación
 ├── build-logic/     # Plugins de convenciones

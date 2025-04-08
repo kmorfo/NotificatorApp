@@ -20,8 +20,8 @@ class MainViewModel(
         private set
 
     init {
-        state = state.copy(isLoading = true)
         viewModelScope.launch {
+            state = state.copy(isLoading = true)
             state =
                 state.copy(
                     hasSeenOnboarding = hasSeenOnboardingUseCase(),
