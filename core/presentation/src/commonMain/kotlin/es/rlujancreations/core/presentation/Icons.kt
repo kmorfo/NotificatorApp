@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -121,6 +122,16 @@ fun EyeClosedIcon(): AppIcon {
 @Composable
 fun EyeOpenedIcon(): AppIcon {
     return AppIcon.PainterIcon(painterResource(Res.drawable.ic_eye_opened))
+}
+
+@Composable
+fun CloseIcon(): AppIcon {
+    return AppIcon.VectorIcon(Icons.Default.Close)
+}
+
+@Composable
+fun SettingsIcon(): AppIcon {
+    return AppIcon.VectorIcon(Icons.Default.Settings)
 }
 
 @Composable

@@ -1,9 +1,17 @@
 package es.rlujancreations.home.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -11,13 +19,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.dp
 import es.rlujancreations.core.presentation.AppsIcon
 import es.rlujancreations.core.presentation.ChannelIcon
+import es.rlujancreations.core.presentation.CloseIcon
 import es.rlujancreations.core.presentation.DevicesIcon
 import es.rlujancreations.core.presentation.IconDisplay
 import es.rlujancreations.core.presentation.ObserveAsEvents
 import es.rlujancreations.core.presentation.ProjectIcon
 import es.rlujancreations.core.presentation.SendIcon
+import es.rlujancreations.core.presentation.SettingsIcon
+import es.rlujancreations.core.presentation.Shapes
 import es.rlujancreations.core.presentation.StringProvider
 import es.rlujancreations.core.presentation.TaskIcon
 import es.rlujancreations.home.presentation.navigation.AdaptiveNavigationScaffold
@@ -42,7 +55,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun HomeScreenRoot(
     onSettingsClick: () -> Unit,
-    onTokenExpired: () -> Unit,
+    onLogoutCase: () -> Unit,
     viewModel: HomeViewModel = koinViewModel(),
 ) {
     HomeScreen(
@@ -50,24 +63,25 @@ fun HomeScreenRoot(
         onAction = { action ->
             when (action) {
                 is HomeAction.OnSettingsClick -> onSettingsClick()
-                is HomeAction.OnTokenExpired -> onTokenExpired()
+                is HomeAction.OnLogoutClick -> onLogoutCase()
                 else -> Unit
             }
             viewModel.onAction(action)
         },
         snackbarHostState = viewModel.snackbarHostState,
         events = viewModel.events,
-        onTokenExpired = onTokenExpired,
+        onLogoutCase = onLogoutCase,
     )
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun HomeScreen(
     state: HomeState,
     events: Flow<HomeEvent>,
     snackbarHostState: SnackbarHostState,
     onAction: (HomeAction) -> Unit,
-    onTokenExpired: () -> Unit,
+    onLogoutCase: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     val stringProvider: StringProvider = koinInject()
@@ -117,7 +131,7 @@ fun HomeScreen(
                         duration = SnackbarDuration.Short,
                     )
                 }
-                onTokenExpired()
+                onLogoutCase()
             }
 
             is HomeEvent.Success -> {
@@ -128,15 +142,62 @@ fun HomeScreen(
                     )
                 }
             }
+
+            HomeEvent.LogoutCase -> {
+                onLogoutCase()
+            }
         }
     }
     AdaptiveNavigationScaffold(
         navigationItems = navigationItems,
         content = { paddingValues ->
-            Column(modifier = Modifier.padding(paddingValues).fillMaxSize()) {
-                navigationItems[state.selectedIndex].label()
-                IconDisplay(navigationItems[state.selectedIndex].icon())
+            Row(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .fillMaxSize(),
+            ) {
+
+                Column(
+                    modifier = Modifier
+                        .padding(paddingValues)
+                        .weight(0.9f)
+                        .fillMaxSize(),
+                ) {
+                    FlowRow(
+                        modifier = Modifier.fillMaxSize().padding(8.dp),
+                    ) {
+                        NotificatorGradientBackground() {
+                            Column {
+                                Text(text = "Hola")
+                                Text(text = "Hola")
+                                Text(text = "Hola")
+                            }
+                        }
+                    }
+
+                }
+                Box(
+                    modifier = Modifier.fillMaxHeight().width(1.dp)
+                        .background(MaterialTheme.colorScheme.primary),
+                )
+                NotificatorToolBar(
+                    modifier = Modifier.fillMaxSize().weight(0.1f),
+                    notificationItems = listOf(
+                        NotificatorToolBarItem(
+                            title = "Settings",
+                            icon = SettingsIcon(),
+                            onClick = { println("settings") },
+                        ),
+                        NotificatorToolBarItem(
+                            title = "Logout",
+                            icon = CloseIcon(),
+                            tint = Color.Red,
+                            onClick = { onAction(HomeAction.OnLogoutClick) },
+                        ),
+                    ),
+                )
             }
+
         },
     )
 }

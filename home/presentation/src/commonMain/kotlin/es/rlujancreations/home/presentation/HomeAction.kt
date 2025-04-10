@@ -6,6 +6,8 @@ package es.rlujancreations.home.presentation
 sealed interface HomeAction {
     data object OnSettingsClick : HomeAction
 
+    data object OnLogoutClick : HomeAction
+
     data object OnTokenExpired : HomeAction
 
     data class OnItemClicked(val index: Int) : HomeAction

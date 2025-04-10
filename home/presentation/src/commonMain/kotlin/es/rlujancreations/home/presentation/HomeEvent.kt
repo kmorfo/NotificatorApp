@@ -11,4 +11,6 @@ sealed interface HomeEvent {
     data class ErrorTokenExpired(val error: UiText) : HomeEvent
 
     data class Success(val message: UiText) : HomeEvent
+
+    data object LogoutCase : HomeEvent
 }
