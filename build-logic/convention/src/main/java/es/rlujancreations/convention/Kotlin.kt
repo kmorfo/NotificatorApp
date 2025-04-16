@@ -49,8 +49,8 @@ internal fun Project.configureAndroidLibraryTarget() {
 private fun CommonExtension<*, *, *, *, *, *>.configureCompileOptions() {
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 
@@ -64,7 +64,7 @@ private fun Project.dependencies() {
 private fun Project.configureKotlin() {
     tasks.withType<KotlinCompile>().configureEach {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
+            jvmTarget.set(JvmTarget.JVM_21)
         }
     }
 }
