@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -19,20 +20,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import es.rlujancreations.core.presentation.AppsIcon
 import es.rlujancreations.core.presentation.ChannelIcon
 import es.rlujancreations.core.presentation.CloseIcon
 import es.rlujancreations.core.presentation.DevicesIcon
-import es.rlujancreations.core.presentation.IconDisplay
 import es.rlujancreations.core.presentation.ObserveAsEvents
 import es.rlujancreations.core.presentation.ProjectIcon
 import es.rlujancreations.core.presentation.SendIcon
 import es.rlujancreations.core.presentation.SettingsIcon
-import es.rlujancreations.core.presentation.Shapes
 import es.rlujancreations.core.presentation.StringProvider
 import es.rlujancreations.core.presentation.TaskIcon
+import es.rlujancreations.core.presentation.WindowWidthSizeClass
+import es.rlujancreations.core.presentation.getScreenDimensions
+import es.rlujancreations.home.presentation.components.NotificatorGradientBackground
+import es.rlujancreations.home.presentation.components.NotificatorToolBar
+import es.rlujancreations.home.presentation.components.NotificatorToolBarItem
 import es.rlujancreations.home.presentation.navigation.AdaptiveNavigationScaffold
 import es.rlujancreations.home.presentation.navigation.NavigationItem
 import kotlinx.coroutines.flow.Flow
@@ -55,7 +58,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun HomeScreenRoot(
     onSettingsClick: () -> Unit,
-    onLogoutCase: () -> Unit,
+    onLogout: () -> Unit,
     viewModel: HomeViewModel = koinViewModel(),
 ) {
     HomeScreen(
@@ -63,14 +66,13 @@ fun HomeScreenRoot(
         onAction = { action ->
             when (action) {
                 is HomeAction.OnSettingsClick -> onSettingsClick()
-                is HomeAction.OnLogoutClick -> onLogoutCase()
                 else -> Unit
             }
             viewModel.onAction(action)
         },
         snackbarHostState = viewModel.snackbarHostState,
         events = viewModel.events,
-        onLogoutCase = onLogoutCase,
+        onLogout = onLogout,
     )
 }
 
@@ -81,7 +83,7 @@ fun HomeScreen(
     events: Flow<HomeEvent>,
     snackbarHostState: SnackbarHostState,
     onAction: (HomeAction) -> Unit,
-    onLogoutCase: () -> Unit,
+    onLogout: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     val stringProvider: StringProvider = koinInject()
@@ -131,7 +133,7 @@ fun HomeScreen(
                         duration = SnackbarDuration.Short,
                     )
                 }
-                onLogoutCase()
+                onLogout()
             }
 
             is HomeEvent.Success -> {
@@ -143,28 +145,45 @@ fun HomeScreen(
                 }
             }
 
-            HomeEvent.LogoutCase -> {
-                onLogoutCase()
+            HomeEvent.Logout -> {
+                onLogout()
             }
         }
     }
     AdaptiveNavigationScaffold(
         navigationItems = navigationItems,
         content = { paddingValues ->
-            Row(
-                modifier = Modifier
-                    .padding(paddingValues)
-                    .fillMaxSize(),
-            ) {
+            val screenType = getScreenDimensions().windowWidthSizeClass
+            val notificationItems = listOf(
+                NotificatorToolBarItem(
+                    title = "Settings",
+                    icon = SettingsIcon(),
+                    onClick = { println("settings") },
+                ),
 
+                NotificatorToolBarItem(
+                    title = "Logout",
+                    icon = CloseIcon(),
+                    tint = Color.Red,
+                    onClick = { onAction(HomeAction.OnLogoutClick) },
+                ),
+            )
+            if (screenType == WindowWidthSizeClass.Compact) {
                 Column(
                     modifier = Modifier
                         .padding(paddingValues)
-                        .weight(0.9f)
                         .fillMaxSize(),
                 ) {
+                    NotificatorToolBar(
+                        modifier = Modifier.fillMaxSize().weight(0.08f),
+                        notificationItems = notificationItems,
+                    )
+                    Box(
+                        modifier = Modifier.fillMaxWidth().height(1.dp)
+                            .background(MaterialTheme.colorScheme.primary),
+                    )
                     FlowRow(
-                        modifier = Modifier.fillMaxSize().padding(8.dp),
+                        modifier = Modifier.fillMaxSize().weight(0.9f).padding(8.dp),
                     ) {
                         NotificatorGradientBackground() {
                             Column {
@@ -174,30 +193,42 @@ fun HomeScreen(
                             }
                         }
                     }
-
                 }
-                Box(
-                    modifier = Modifier.fillMaxHeight().width(1.dp)
-                        .background(MaterialTheme.colorScheme.primary),
-                )
-                NotificatorToolBar(
-                    modifier = Modifier.fillMaxSize().weight(0.1f),
-                    notificationItems = listOf(
-                        NotificatorToolBarItem(
-                            title = "Settings",
-                            icon = SettingsIcon(),
-                            onClick = { println("settings") },
-                        ),
-                        NotificatorToolBarItem(
-                            title = "Logout",
-                            icon = CloseIcon(),
-                            tint = Color.Red,
-                            onClick = { onAction(HomeAction.OnLogoutClick) },
-                        ),
-                    ),
-                )
-            }
+            } else {
+                Row(
+                    modifier = Modifier
+                        .padding(paddingValues)
+                        .fillMaxSize(),
+                ) {
 
+                    Column(
+                        modifier = Modifier
+                            .padding(paddingValues)
+                            .weight(0.9f)
+                            .fillMaxSize(),
+                    ) {
+                        FlowRow(
+                            modifier = Modifier.fillMaxSize().padding(8.dp),
+                        ) {
+                            NotificatorGradientBackground() {
+                                Column {
+                                    Text(text = "Hola")
+                                    Text(text = "Hola")
+                                    Text(text = "Hola")
+                                }
+                            }
+                        }
+                    }
+                    Box(
+                        modifier = Modifier.fillMaxHeight().width(1.dp)
+                            .background(MaterialTheme.colorScheme.primary),
+                    )
+                    NotificatorToolBar(
+                        modifier = Modifier.fillMaxSize().weight(0.1f),
+                        notificationItems = notificationItems,
+                    )
+                }
+            }
         },
     )
 }

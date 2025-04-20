@@ -1,4 +1,4 @@
-package es.rlujancreations.home.presentation
+package es.rlujancreations.home.presentation.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -13,6 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import es.rlujancreations.core.presentation.AppIcon
 import es.rlujancreations.core.presentation.IconDisplay
+import es.rlujancreations.core.presentation.WindowWidthSizeClass
+import es.rlujancreations.core.presentation.getScreenDimensions
 
 /**
  * Created by Raúl L.C. on 8/4/25.
@@ -23,10 +25,13 @@ fun NotificatorToolBar(
     modifier: Modifier = Modifier,
     notificationItems: List<NotificatorToolBarItem> = emptyList(),
 ) {
+    val screenType = getScreenDimensions().windowWidthSizeClass
     FlowRow(
         modifier = modifier,
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalArrangement = Arrangement.Center,
+        verticalArrangement = if (screenType == WindowWidthSizeClass.Compact)
+            Arrangement.Center else Arrangement.SpaceBetween,
+        horizontalArrangement = if (screenType == WindowWidthSizeClass.Compact)
+            Arrangement.End else Arrangement.Center,
     ) {
         notificationItems.forEach { item ->
             IconDisplay(

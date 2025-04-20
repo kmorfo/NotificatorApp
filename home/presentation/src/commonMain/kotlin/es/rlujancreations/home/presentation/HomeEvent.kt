@@ -12,5 +12,5 @@ sealed interface HomeEvent {
 
     data class Success(val message: UiText) : HomeEvent
 
-    data object LogoutCase : HomeEvent
+    data object Logout : HomeEvent
 }

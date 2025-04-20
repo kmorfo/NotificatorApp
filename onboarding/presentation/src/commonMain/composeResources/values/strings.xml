@@ -5,13 +5,13 @@
     <string name="btn_getStarted">Get Started</string>
 
     <string name="onboarding_title_notificator">NotificatorApp</string>
-    <string name="onboarding_subtitle_notificator">Administra todas tus notificaciones de Firebase Cloud Messaging en una app.</string>
-    <string name="onboarding_title_project">Proyectos</string>
-    <string name="onboarding_subtitle_project">Inicialmente tendrás que registrar un proyecto.</string>
+    <string name="onboarding_subtitle_notificator">Manage all your Firebase Cloud Messaging notifications in one app.</string>
+    <string name="onboarding_title_project">Projects</string>
+    <string name="onboarding_subtitle_project">Initially you will have to register a project.</string>
     <string name="onboarding_title_app">Apps</string>
-    <string name="onboarding_subtitle_app">Dentro de cada proyecto se registraran las apps asociadas al mismo.</string>
-    <string name="onboarding_title_device">Dispositivos</string>
-    <string name="onboarding_subtitle_device">Podrás administrar los dispositivos asociados a cada una de las apps.</string>
-    <string name="onboarding_title_message">Notificaciones</string>
-    <string name="onboarding_subtitle_message">Ya estas listo para enviar notificaciones. Además, puedes configurar distintos canales, programar sus envíos y más.</string>
+    <string name="onboarding_subtitle_app">Within each project, the apps associated with it are registered.</string>
+    <string name="onboarding_title_device">Devices</string>
+    <string name="onboarding_subtitle_device">You will be able to manage the devices associated with each of the apps.</string>
+    <string name="onboarding_title_message">Notifications</string>
+    <string name="onboarding_subtitle_message">You're now ready to send notifications. You can also configure different channels, schedule their delivery, and more.</string>
 </resources>

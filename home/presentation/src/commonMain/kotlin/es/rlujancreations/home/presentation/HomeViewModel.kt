@@ -68,7 +68,12 @@ class HomeViewModel(
             HomeAction.OnTokenExpired -> {
             }
 
-            else -> Unit
+            HomeAction.OnLogoutClick -> {
+                viewModelScope.launch {
+                    logoutUseCase()
+                    eventChannel.send(HomeEvent.Logout)
+                }
+            }
         }
     }
 

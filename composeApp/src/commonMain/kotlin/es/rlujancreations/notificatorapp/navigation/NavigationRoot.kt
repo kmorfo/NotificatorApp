@@ -97,7 +97,7 @@ private fun NavGraphBuilder.homeGraph(navController: NavHostController) {
         composable<Screen.Home.Scaffold> {
             HomeScreenRoot(
                 onSettingsClick = { navController.navigate(Screen.Home.Settings) },
-                onLogoutCase = {
+                onLogout = {
                     navController.navigate(Screen.Auth.Login) {
                         popUpTo(Screen.Home.Scaffold) { inclusive = true }
                         launchSingleTop = true
